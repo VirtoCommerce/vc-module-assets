@@ -12,7 +12,7 @@ angular.module('virtoCommerce.assetsModule')
                 // Create the uploader
                 var uploader = $scope.uploader = new FileUploader({
                     scope: $scope,
-                    url: 'api/platform/assets?folderUrl=' + folderUrl,
+                    url: 'api/assets?folderUrl=' + folderUrl,
                     method: 'POST',
                     //autoUpload: true,
                     removeAfterUpload: true
