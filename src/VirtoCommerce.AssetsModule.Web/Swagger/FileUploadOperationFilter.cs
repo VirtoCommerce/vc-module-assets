@@ -3,7 +3,7 @@ using System.Linq;
 using System.Reflection;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
-using VirtoCommerce.Platform.Core.Swagger;
+using VirtoCommerce.AssetsModule.Core.Swagger;
 
 namespace VirtoCommerce.AssetsModule.Web.Swagger
 {
