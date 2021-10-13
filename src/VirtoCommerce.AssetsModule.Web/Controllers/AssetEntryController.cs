@@ -9,7 +9,6 @@ using VirtoCommerce.Platform.Core.GenericCrud;
 
 namespace VirtoCommerce.AssetsModule.Web.Controllers.Api
 {
-    [Route("api/platform/assetentries")]
     [Route("api/assetentries")]
     public class AssetEntryController : Controller
     {

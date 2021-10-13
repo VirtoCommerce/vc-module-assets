@@ -22,7 +22,6 @@ using VirtoCommerce.Platform.Data.Helpers;
 
 namespace VirtoCommerce.AssetsModule.Web.Controllers.Api
 {
-    [Route("api/platform/assets")]
     [Route("api/assets")]
     public class AssetsController : Controller
     {
