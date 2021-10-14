@@ -23,7 +23,7 @@
     <dependencies>
     </dependencies>
   <groups>
-    <group></group>
+    <group>commerce</group>
   </groups>
   <useFullTypeNameInSwagger>false</useFullTypeNameInSwagger>
 </module>
