@@ -9,7 +9,7 @@ if (AppDependencies !== undefined) {
 angular.module(moduleName, [])
     .config(['$stateProvider', function ($stateProvider) {
         $stateProvider
-            .state('workspace.assets', {
+            .state('workspace.assetsModule', {
                 url: '/assets',
                 templateUrl: '$(Platform)/Scripts/common/templates/home.tpl.html',
                 controller: ['$scope', 'platformWebApp.bladeNavigationService', function ($scope, bladeNavigationService) {
