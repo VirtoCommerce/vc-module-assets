@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <TargetFramework>netcoreapp3.1</TargetFramework>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+        <noWarn>1591</noWarn>
+        <IsPackable>True</IsPackable>
+        <PublishRepositoryUrl>true</PublishRepositoryUrl>
+        <EmbedUntrackedSources>true</EmbedUntrackedSources>
+        <IncludeSymbols>true</IncludeSymbols>
+        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    </PropertyGroup>
+    <ItemGroup>
+        <PackageReference Include="VirtoCommerce.Platform.Core" Version="3.81.0" />
+    </ItemGroup>
+    <ItemGroup>
+      <Folder Include="Model\" />
+    </ItemGroup>
+
+</Project>
