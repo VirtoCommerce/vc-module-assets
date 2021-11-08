@@ -22,7 +22,7 @@
   <moduleType>VirtoCommerce.AssetsModule.Web.Module, VirtoCommerce.AssetsModule.Web</moduleType>
   <dependencies />
   <groups>
-    <group />
+    <group>commerce</group>
   </groups>
   <useFullTypeNameInSwagger>false</useFullTypeNameInSwagger>
 </module>
