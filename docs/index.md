@@ -59,4 +59,4 @@ To switch between the implementations, follow these steps:
 ```
 3. Modify the following settings:
     - Set the **Provider** value to **FileSystem** or **AzureBlobStorage**
-    - Provide **ConnectionString** in case you are going to use the **AzureBlobStorage** implementation
+    - Provide **ConnectionString** in case you are going to use the **AzureBlobStorage** implementation option
