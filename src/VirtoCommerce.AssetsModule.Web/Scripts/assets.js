@@ -30,7 +30,7 @@ angular.module(moduleName, [])
             icon: 'fa fa-folder-o',
             title: 'platform.menu.assets',
             priority: 130,
-            action: function () { $state.go('workspace.assets'); },
+            action: function () { $state.go('workspace.assetsModule'); },
             permission: 'platform:asset:access'
         };
         mainMenuService.addMenuItem(menuItem);
