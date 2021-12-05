@@ -33,9 +33,9 @@ namespace VirtoCommerce.AssetsModule.Core.Assets
             if(blacklisted) result = true;
             else if(blackListCount == 0)
             {
-                if (whitelisted) result = false;
-                else if (whiteListCount == 0) result = false;
-                else if (whiteListCount > 0 && !whitelisted) result = true;
+                if (whiteListCount == 0) result = false;
+                else if (whitelisted) result = false;
+                else result = true;
             }
 
             return result;
