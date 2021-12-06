@@ -4,6 +4,7 @@ using VirtoCommerce.Platform.Core;
 using Xunit;
 using Moq;
 using VirtoCommerce.Platform.Core.Settings;
+using static VirtoCommerce.Platform.Core.PlatformConstants.Settings;
 
 namespace VirtoCommerce.AssetsModule.Tests.Provider
 {
@@ -26,8 +27,8 @@ namespace VirtoCommerce.AssetsModule.Tests.Provider
         public void IsExtensionBlacklisted_Blacklisted_ReturnTrue()
         {
             // Arrange
-            SetupAllowedValues(PlatformConstants.Settings.Security.FileExtensionsBlackList, ".pdf");
-            SetupAllowedValues(PlatformConstants.Settings.Security.FileExtensionsWhiteList);
+            SetupAllowedValues(Security.FileExtensionsBlackList, ".pdf");
+            SetupAllowedValues(Security.FileExtensionsWhiteList);
             var service = new BasicBlobProviderMock(_platformOptionsMock.Object, _settingsManagerMock.Object);
 
             // Act
@@ -41,8 +42,8 @@ namespace VirtoCommerce.AssetsModule.Tests.Provider
         public void IsExtensionBlacklisted_NotWhitelisted_ReturnTrue()
         {
             // Arrange
-            SetupAllowedValues(PlatformConstants.Settings.Security.FileExtensionsBlackList);
-            SetupAllowedValues(PlatformConstants.Settings.Security.FileExtensionsWhiteList, ".txt");
+            SetupAllowedValues(Security.FileExtensionsBlackList);
+            SetupAllowedValues(Security.FileExtensionsWhiteList, ".txt");
             var service = new BasicBlobProviderMock(_platformOptionsMock.Object, _settingsManagerMock.Object);
 
             // Act
@@ -56,8 +57,8 @@ namespace VirtoCommerce.AssetsModule.Tests.Provider
         public void IsExtensionBlacklisted_Whitelisted_ReturnFalse()
         {
             // Arrange
-            SetupAllowedValues(PlatformConstants.Settings.Security.FileExtensionsBlackList);
-            SetupAllowedValues(PlatformConstants.Settings.Security.FileExtensionsWhiteList, ".txt");
+            SetupAllowedValues(Security.FileExtensionsBlackList);
+            SetupAllowedValues(Security.FileExtensionsWhiteList, ".txt");
             var service = new BasicBlobProviderMock(_platformOptionsMock.Object, _settingsManagerMock.Object);
 
             // Act
@@ -71,8 +72,8 @@ namespace VirtoCommerce.AssetsModule.Tests.Provider
         public void IsExtensionBlacklisted_ListsIsEmpty_ReturnFalse()
         {
             // Arrange
-            SetupAllowedValues(PlatformConstants.Settings.Security.FileExtensionsBlackList);
-            SetupAllowedValues(PlatformConstants.Settings.Security.FileExtensionsWhiteList);
+            SetupAllowedValues(Security.FileExtensionsBlackList);
+            SetupAllowedValues(Security.FileExtensionsWhiteList);
             var service = new BasicBlobProviderMock(_platformOptionsMock.Object, _settingsManagerMock.Object);
 
             // Act
@@ -86,8 +87,8 @@ namespace VirtoCommerce.AssetsModule.Tests.Provider
         public void IsExtensionBlacklisted_BlacklistedAndWhitelisted_ReturnTrue()
         {
             // Arrange
-            SetupAllowedValues(PlatformConstants.Settings.Security.FileExtensionsBlackList, ".mp3");
-            SetupAllowedValues(PlatformConstants.Settings.Security.FileExtensionsWhiteList, ".mp3");
+            SetupAllowedValues(Security.FileExtensionsBlackList, ".mp3");
+            SetupAllowedValues(Security.FileExtensionsWhiteList, ".mp3");
             var service = new BasicBlobProviderMock(_platformOptionsMock.Object, _settingsManagerMock.Object);
 
             // Act
