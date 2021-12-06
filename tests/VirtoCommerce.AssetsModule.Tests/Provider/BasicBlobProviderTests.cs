@@ -26,14 +26,8 @@ namespace VirtoCommerce.AssetsModule.Tests.Provider
         public void IsExtensionBlacklisted_Blacklisted_ReturnTrue()
         {
             // Arrange
-            _settingsManagerMock.Setup(x => x.GetObjectSettingAsync(PlatformConstants.Settings.Security.FileExtensionsBlackList.Name, null, null)).ReturnsAsync(new ObjectSettingEntry()
-            {
-                AllowedValues = new string[] { ".pdf" }
-            });
-            _settingsManagerMock.Setup(x => x.GetObjectSettingAsync(PlatformConstants.Settings.Security.FileExtensionsWhiteList.Name, null, null)).ReturnsAsync(new ObjectSettingEntry()
-            {
-                AllowedValues = new string[0]
-            });
+            SetupAllowedValues(PlatformConstants.Settings.Security.FileExtensionsBlackList, ".pdf");
+            SetupAllowedValues(PlatformConstants.Settings.Security.FileExtensionsWhiteList);
             var service = new BasicBlobProviderMock(_platformOptionsMock.Object, _settingsManagerMock.Object);
 
             // Act
@@ -47,14 +41,8 @@ namespace VirtoCommerce.AssetsModule.Tests.Provider
         public void IsExtensionBlacklisted_NotWhitelisted_ReturnTrue()
         {
             // Arrange
-            _settingsManagerMock.Setup(x => x.GetObjectSettingAsync(PlatformConstants.Settings.Security.FileExtensionsBlackList.Name, null, null)).ReturnsAsync(new ObjectSettingEntry()
-            {
-                AllowedValues = new string[0]
-            });
-            _settingsManagerMock.Setup(x => x.GetObjectSettingAsync(PlatformConstants.Settings.Security.FileExtensionsWhiteList.Name, null, null)).ReturnsAsync(new ObjectSettingEntry()
-            {
-                AllowedValues = new string[] { ".txt" }
-            });
+            SetupAllowedValues(PlatformConstants.Settings.Security.FileExtensionsBlackList);
+            SetupAllowedValues(PlatformConstants.Settings.Security.FileExtensionsWhiteList, ".txt");
             var service = new BasicBlobProviderMock(_platformOptionsMock.Object, _settingsManagerMock.Object);
 
             // Act
@@ -68,14 +56,8 @@ namespace VirtoCommerce.AssetsModule.Tests.Provider
         public void IsExtensionBlacklisted_Whitelisted_ReturnFalse()
         {
             // Arrange
-            _settingsManagerMock.Setup(x => x.GetObjectSettingAsync(PlatformConstants.Settings.Security.FileExtensionsBlackList.Name, null, null)).ReturnsAsync(new ObjectSettingEntry()
-            {
-                AllowedValues = new string[0]
-            });
-            _settingsManagerMock.Setup(x => x.GetObjectSettingAsync(PlatformConstants.Settings.Security.FileExtensionsWhiteList.Name, null, null)).ReturnsAsync(new ObjectSettingEntry()
-            {
-                AllowedValues = new string[] { ".txt" }
-            });
+            SetupAllowedValues(PlatformConstants.Settings.Security.FileExtensionsBlackList);
+            SetupAllowedValues(PlatformConstants.Settings.Security.FileExtensionsWhiteList, ".txt");
             var service = new BasicBlobProviderMock(_platformOptionsMock.Object, _settingsManagerMock.Object);
 
             // Act
@@ -89,14 +71,8 @@ namespace VirtoCommerce.AssetsModule.Tests.Provider
         public void IsExtensionBlacklisted_ListsIsEmpty_ReturnFalse()
         {
             // Arrange
-            _settingsManagerMock.Setup(x => x.GetObjectSettingAsync(PlatformConstants.Settings.Security.FileExtensionsBlackList.Name, null, null)).ReturnsAsync(new ObjectSettingEntry()
-            {
-                AllowedValues = new string[0]
-            });
-            _settingsManagerMock.Setup(x => x.GetObjectSettingAsync(PlatformConstants.Settings.Security.FileExtensionsWhiteList.Name, null, null)).ReturnsAsync(new ObjectSettingEntry()
-            {
-                AllowedValues = new string[0]
-            });
+            SetupAllowedValues(PlatformConstants.Settings.Security.FileExtensionsBlackList);
+            SetupAllowedValues(PlatformConstants.Settings.Security.FileExtensionsWhiteList);
             var service = new BasicBlobProviderMock(_platformOptionsMock.Object, _settingsManagerMock.Object);
 
             // Act
@@ -110,14 +86,8 @@ namespace VirtoCommerce.AssetsModule.Tests.Provider
         public void IsExtensionBlacklisted_BlacklistedAndWhitelisted_ReturnTrue()
         {
             // Arrange
-            _settingsManagerMock.Setup(x => x.GetObjectSettingAsync(PlatformConstants.Settings.Security.FileExtensionsBlackList.Name, null, null)).ReturnsAsync(new ObjectSettingEntry()
-            {
-                AllowedValues = new string[] { ".mp3" }
-            });
-            _settingsManagerMock.Setup(x => x.GetObjectSettingAsync(PlatformConstants.Settings.Security.FileExtensionsWhiteList.Name, null, null)).ReturnsAsync(new ObjectSettingEntry()
-            {
-                AllowedValues = new string[] { ".mp3" }
-            });
+            SetupAllowedValues(PlatformConstants.Settings.Security.FileExtensionsBlackList, ".mp3");
+            SetupAllowedValues(PlatformConstants.Settings.Security.FileExtensionsWhiteList, ".mp3");
             var service = new BasicBlobProviderMock(_platformOptionsMock.Object, _settingsManagerMock.Object);
 
             // Act
@@ -125,6 +95,14 @@ namespace VirtoCommerce.AssetsModule.Tests.Provider
 
             // Assert
             result.Should().BeTrue();
+        }
+
+        private void SetupAllowedValues(SettingDescriptor extensionList, params string[] values)
+        {
+            _settingsManagerMock.Setup(x => x.GetObjectSettingAsync(extensionList.Name, null, null)).ReturnsAsync(new ObjectSettingEntry()
+            {
+                AllowedValues = values
+            });
         }
     }
 }
