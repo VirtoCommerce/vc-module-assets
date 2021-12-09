@@ -29,10 +29,16 @@ namespace VirtoCommerce.AssetsModule.Core.Assets
             var whitelisted = (whiteList.Any(x => path.Trim().EndsWith(x.Trim(), StringComparison.OrdinalIgnoreCase)));
             var whiteListCount = whiteList.Count();
 
-            if (blacklisted) return true;
-            if (blackListCount != 0 || whiteListCount == 0) return false;
-
-            return !whitelisted;
+            if (whiteListCount != 0)
+            {
+                if (blackListCount != 0 && blacklisted) return true;
+                return !whitelisted;
+            }
+            else
+            {
+                if (blackListCount != 0) return blacklisted;
+            }
+            return false;
         }
     }
 }

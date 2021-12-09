@@ -98,6 +98,36 @@ namespace VirtoCommerce.AssetsModule.Tests.Provider
             result.Should().BeTrue();
         }
 
+        [Fact]
+        public void IsExtensionBlacklisted_NotBlacklistedAndWhitelisted_ReturnTrue()
+        {
+            // Arrange
+            SetupAllowedValues(Security.FileExtensionsBlackList, ".mp3");
+            SetupAllowedValues(Security.FileExtensionsWhiteList, ".txt");
+            var service = new BasicBlobProviderMock(_platformOptionsMock.Object, _settingsManagerMock.Object);
+
+            // Act
+            var result = service.IsExtensionBlacklisted(".pdf");
+
+            // Assert
+            result.Should().BeTrue();
+        }
+
+        [Fact]
+        public void IsExtensionBlacklisted_NotBlacklistedAndWhiteListEmpty_ReturnFalse()
+        {
+            // Arrange
+            SetupAllowedValues(Security.FileExtensionsBlackList, ".mp3");
+            SetupAllowedValues(Security.FileExtensionsWhiteList);
+            var service = new BasicBlobProviderMock(_platformOptionsMock.Object, _settingsManagerMock.Object);
+
+            // Act
+            var result = service.IsExtensionBlacklisted(".pdf");
+
+            // Assert
+            result.Should().BeFalse();
+        }
+
         private void SetupAllowedValues(SettingDescriptor extensionList, params string[] values)
         {
             _settingsManagerMock.Setup(x => x.GetObjectSettingAsync(extensionList.Name, null, null)).ReturnsAsync(new ObjectSettingEntry()
