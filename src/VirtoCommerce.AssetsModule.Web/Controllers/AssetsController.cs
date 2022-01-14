@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web;
 using Microsoft.AspNetCore.Authorization;
@@ -29,11 +29,13 @@ namespace VirtoCommerce.AssetsModule.Web.Controllers.Api
         private readonly IBlobUrlResolver _urlResolver;
         private static readonly FormOptions _defaultFormOptions = new FormOptions();
         private readonly PlatformOptions _platformOptions;
+        private readonly IHttpClientFactory _httpClientFactory;
 
-        public AssetsController(IBlobStorageProvider blobProvider, IBlobUrlResolver urlResolver, IOptions<PlatformOptions> platformOptions)
+        public AssetsController(IBlobStorageProvider blobProvider, IBlobUrlResolver urlResolver, IOptions<PlatformOptions> platformOptions, IHttpClientFactory httpClientFactory)
         {
             _blobProvider = blobProvider;
             _urlResolver = urlResolver;
+            _httpClientFactory = httpClientFactory;
             _platformOptions = platformOptions.Value;
         }
 
@@ -126,9 +128,9 @@ namespace VirtoCommerce.AssetsModule.Web.Controllers.Api
                 {
                     var fileName = name ?? HttpUtility.UrlDecode(Path.GetFileName(url));
                     var fileUrl = folderUrl + "/" + fileName;
-                    using (var client = new WebClient())
+                    using (var client = _httpClientFactory.CreateClient())
                     using (var blobStream = _blobProvider.OpenWrite(fileUrl))
-                    using (var remoteStream = client.OpenRead(url))
+                    using (var remoteStream = await client.GetStreamAsync(url))
                     {
                         await remoteStream.CopyToAsync(blobStream);
                         var blobInfo = AbstractTypeFactory<BlobInfo>.TryCreateInstance();
