@@ -24,7 +24,7 @@ namespace VirtoCommerce.AssetsModule.Data.Repositories
             modelBuilder.Entity<AssetEntryEntity>().Property(x => x.ModifiedBy).HasMaxLength(64);
             modelBuilder.Entity<AssetEntryEntity>().HasIndex(x => new { x.RelativeUrl, x.Name })
                 .IsUnique(false)
-                .HasName("IX_AssetEntry_RelativeUrl_Name");
+                .HasDatabaseName("IX_AssetEntry_RelativeUrl_Name");
             base.OnModelCreating(modelBuilder);
         }
 
