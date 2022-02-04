@@ -62,7 +62,7 @@ To switch between the implementations, follow these steps:
     - Provide **ConnectionString** in case you are going to use the **AzureBlobStorage** implementation option
 
 ## Documentation
-* [Catalog Module Documentation](https://virtocommerce.com/docs/latest/modules/assets/)
+* [Assets Module Documentation](https://virtocommerce.com/docs/latest/modules/assets/)
 * [View on GitHub](docs/index.md)
 
 
