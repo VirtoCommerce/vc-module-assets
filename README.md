@@ -72,7 +72,7 @@ To switch between the implementations, follow these steps:
 * Installation: https://www.virtocommerce.com/docs/latest/user-guide/modules/
 * Home: https://virtocommerce.com
 * Community: https://www.virtocommerce.org
-* [Download Latest Release](https://github.com/VirtoCommerce/vc-module-catalog/releases/latest)
+* [Download Latest Release](https://github.com/VirtoCommerce/vc-module-assets/releases/latest)
 
 ## License
 
