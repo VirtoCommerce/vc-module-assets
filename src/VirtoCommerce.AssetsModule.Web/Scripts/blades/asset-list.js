@@ -32,23 +32,25 @@ angular.module('virtoCommerce.assetsModule')
             };
 
             //Breadcrumbs
-            function setBreadcrumbs() {
-                if (blade.breadcrumbs) {
-                    //Clone array (angular.copy leaves the same reference)
-                    var breadcrumbs = blade.breadcrumbs.slice(0);
+            function setBreadcrumbs() {                                   
+                blade.breadcrumbs = blade.breadcrumbs
+                    ? getUniqueBreadcrumbs()
+                    : [generateBreadcrumb(blade.currentEntity.url, 'platform.blades.asset-list.bread-crumb-top')];
+            }
 
-                    //prevent duplicate items
-                    if (blade.currentEntity.url && _.all(breadcrumbs,
-                        function (x) {
-                            return x.id !== blade.currentEntity.url;
-                        })) {
-                        var breadCrumb = generateBreadcrumb(blade.currentEntity.url, blade.currentEntity.name);
-                        breadcrumbs.push(breadCrumb);
-                    }
-                    blade.breadcrumbs = breadcrumbs;
-                } else {
-                    blade.breadcrumbs = [generateBreadcrumb(blade.currentEntity.url, 'platform.blades.asset-list.bread-crumb-top')];
+            function getUniqueBreadcrumbs() {
+                //Clone array (angular.copy leaves the same reference)
+                var breadcrumbs = blade.breadcrumbs.slice(0);
+
+                //prevent duplicate items
+                if (blade.currentEntity.url && _.all(breadcrumbs,
+                    function (x) {
+                        return x.id !== blade.currentEntity.url
+                    })) {
+                    var breadCrumb = generateBreadcrumb(blade.currentEntity.url, blade.currentEntity.name);
+                    breadcrumbs.push(breadCrumb);
                 }
+                return breadcrumbs;
             }
 
             function generateBreadcrumb(id, name) {
@@ -165,48 +167,12 @@ angular.module('virtoCommerce.assetsModule')
                     },
                     permission: 'platform:asset:create'
                 },
-                //{
-                //    name: "Rename", icon: 'fa fa-font',
-                //    executeMethod: function () {
-                //        rename(getFirstChecked())
-                //    },
-                //    canExecuteMethod: isSingleChecked,
-                //    permission: 'platform:asset:update'
-                //},
                 {
                     name: "platform.commands.delete", icon: 'fas fa-trash-alt',
                     executeMethod: function () { deleteList($scope.gridApi.selection.getSelectedRows()); },
                     canExecuteMethod: isItemsChecked,
                     permission: 'platform:asset:delete'
                 }
-                //{
-                //    name: "Cut",
-                //    icon: 'fas fa-cut',
-                //    executeMethod: function () {
-                //    },
-                //    canExecuteMethod: isItemsChecked,
-                //    permission: 'asset:delete'
-                //},
-                //{
-                //    name: "Paste",
-                //    icon: 'fas fa-paste',
-                //    executeMethod: function () {
-                //        blade.isLoading = true;
-                //        assets.move({
-                //            folder: blade.currentEntity.url,
-                //            listEntries: $storage.catalogClipboardContent
-                //        }, function () {
-                //            delete $storage.catalogClipboardContent;
-                //            blade.refresh();
-                //        }, function (error) {
-                //            bladeNavigationService.setError('Error ' + error.status, blade);
-                //        });
-                //    },
-                //    canExecuteMethod: function () {
-                //        return $storage.catalogClipboardContent;
-                //    },
-                //    permission: 'asset:delete'
-                //}
             ];
 
             // ui-grid
