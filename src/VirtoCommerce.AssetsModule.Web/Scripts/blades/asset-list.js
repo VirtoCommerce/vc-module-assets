@@ -1,6 +1,7 @@
 angular.module('virtoCommerce.assetsModule')
-    .controller('virtoCommerce.assetsModule.assetListController', ['$scope', '$translate', 'platformWebApp.assets.api', 'platformWebApp.bladeNavigationService', 'platformWebApp.dialogService', '$sessionStorage', 'platformWebApp.bladeUtils', 'platformWebApp.uiGridHelper',
-        function ($scope, $translate, assets, bladeNavigationService, dialogService, $storage, bladeUtils, uiGridHelper) {
+    .controller('virtoCommerce.assetsModule.assetListController', ['$scope', '$translate', 'platformWebApp.assets.api',
+        'platformWebApp.bladeNavigationService', 'platformWebApp.dialogService', 'platformWebApp.bladeUtils', 'platformWebApp.uiGridHelper',
+        function ($scope, $translate, assets, bladeNavigationService, dialogService, bladeUtils, uiGridHelper) {
             var blade = $scope.blade;
             blade.title = 'platform.blades.asset-list.title';
             if (!blade.currentEntity) {
@@ -19,7 +20,7 @@ angular.module('virtoCommerce.assetsModule')
                         _.each(data.results, function (x) {
                             x.isImage = x.contentType && x.contentType.startsWith('image/');
                             if (x.isImage) {
-                                x.noCacheUrl = x.url + '?t=' + x.modifiedDate;
+                                x.noCacheUrl = `${x.url}?t=${x.modifiedDate}`;
                             }
                         });
                         $scope.listEntries = data.results;
@@ -37,7 +38,10 @@ angular.module('virtoCommerce.assetsModule')
                     var breadcrumbs = blade.breadcrumbs.slice(0);
 
                     //prevent duplicate items
-                    if (blade.currentEntity.url && _.all(breadcrumbs, function (x) { return x.id !== blade.currentEntity.url; })) {
+                    if (blade.currentEntity.url && _.all(breadcrumbs,
+                        function (x) {
+                            return x.id !== blade.currentEntity.url;
+                        })) {
                         var breadCrumb = generateBreadcrumb(blade.currentEntity.url, blade.currentEntity.name);
                         breadcrumbs.push(breadCrumb);
                     }
