@@ -32,7 +32,7 @@ angular.module('virtoCommerce.assetsModule')
             };
 
             //Breadcrumbs
-            function setBreadcrumbs() {                                   
+            function setBreadcrumbs() {
                 blade.breadcrumbs = blade.breadcrumbs
                     ? getUniqueBreadcrumbs()
                     : [generateBreadcrumb(blade.currentEntity.url, 'platform.blades.asset-list.bread-crumb-top')];
