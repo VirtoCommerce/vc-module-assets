@@ -70,9 +70,7 @@ angular.module('virtoCommerce.assetsModule')
 
             function newFolder() {
                 var tooltip = $translate.instant('platform.dialogs.create-folder.title');
-
                 var result = prompt(tooltip + "\n\nEnter folder name:");
-
                 if (result != null) {
                     assets.createFolder({ name: result, parentUrl: blade.currentEntity.url }, blade.refresh);
                 }
