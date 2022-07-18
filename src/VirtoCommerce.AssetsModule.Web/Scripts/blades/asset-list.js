@@ -1,6 +1,7 @@
 angular.module('virtoCommerce.assetsModule')
-    .controller('virtoCommerce.assetsModule.assetListController', ['$scope', '$translate', 'platformWebApp.assets.api', 'platformWebApp.bladeNavigationService', 'platformWebApp.dialogService', '$sessionStorage', 'platformWebApp.bladeUtils', 'platformWebApp.uiGridHelper',
-        function ($scope, $translate, assets, bladeNavigationService, dialogService, $storage, bladeUtils, uiGridHelper) {
+    .controller('virtoCommerce.assetsModule.assetListController', ['$scope', '$translate', 'platformWebApp.assets.api',
+        'platformWebApp.bladeNavigationService', 'platformWebApp.dialogService', 'platformWebApp.bladeUtils', 'platformWebApp.uiGridHelper',
+        function ($scope, $translate, assets, bladeNavigationService, dialogService, bladeUtils, uiGridHelper) {
             var blade = $scope.blade;
             blade.title = 'platform.blades.asset-list.title';
             if (!blade.currentEntity) {
@@ -19,7 +20,7 @@ angular.module('virtoCommerce.assetsModule')
                         _.each(data.results, function (x) {
                             x.isImage = x.contentType && x.contentType.startsWith('image/');
                             if (x.isImage) {
-                                x.noCacheUrl = x.url + '?t=' + x.modifiedDate;
+                                x.noCacheUrl = `${x.url}?t=${x.modifiedDate}`;
                             }
                         });
                         $scope.listEntries = data.results;
@@ -32,19 +33,24 @@ angular.module('virtoCommerce.assetsModule')
 
             //Breadcrumbs
             function setBreadcrumbs() {
-                if (blade.breadcrumbs) {
-                    //Clone array (angular.copy leaves the same reference)
-                    var breadcrumbs = blade.breadcrumbs.slice(0);
+                blade.breadcrumbs = blade.breadcrumbs
+                    ? getUniqueBreadcrumbs()
+                    : [generateBreadcrumb(blade.currentEntity.url, 'platform.blades.asset-list.bread-crumb-top')];
+            }
 
-                    //prevent duplicate items
-                    if (blade.currentEntity.url && _.all(breadcrumbs, function (x) { return x.id !== blade.currentEntity.url; })) {
-                        var breadCrumb = generateBreadcrumb(blade.currentEntity.url, blade.currentEntity.name);
-                        breadcrumbs.push(breadCrumb);
-                    }
-                    blade.breadcrumbs = breadcrumbs;
-                } else {
-                    blade.breadcrumbs = [generateBreadcrumb(blade.currentEntity.url, 'platform.blades.asset-list.bread-crumb-top')];
+            function getUniqueBreadcrumbs() {
+                //Clone array (angular.copy leaves the same reference)
+                var breadcrumbs = blade.breadcrumbs.slice(0);
+
+                //prevent duplicate items
+                if (blade.currentEntity.url && _.all(breadcrumbs,
+                    function (x) {
+                        return x.id !== blade.currentEntity.url
+                    })) {
+                    var breadCrumb = generateBreadcrumb(blade.currentEntity.url, blade.currentEntity.name);
+                    breadcrumbs.push(breadCrumb);
                 }
+                return breadcrumbs;
             }
 
             function generateBreadcrumb(id, name) {
@@ -64,9 +70,7 @@ angular.module('virtoCommerce.assetsModule')
 
             function newFolder() {
                 var tooltip = $translate.instant('platform.dialogs.create-folder.title');
-
                 var result = prompt(tooltip + "\n\nEnter folder name:");
-
                 if (result != null) {
                     assets.createFolder({ name: result, parentUrl: blade.currentEntity.url }, blade.refresh);
                 }
@@ -79,17 +83,6 @@ angular.module('virtoCommerce.assetsModule')
             $scope.downloadUrl = function (data) {
                 window.open(data.url, '_blank');
             };
-
-            //$scope.rename = function (listItem) {
-            //    rename(listItem);
-            //};
-
-            //function rename(listItem) {
-            //    var result = prompt("Enter new name", listItem.name);
-            //    if (result) {
-            //        listItem.name = result;
-            //    }
-            //}
 
             function isItemsChecked() {
                 return $scope.gridApi && _.any($scope.gridApi.selection.getSelectedRows());
@@ -172,48 +165,12 @@ angular.module('virtoCommerce.assetsModule')
                     },
                     permission: 'platform:asset:create'
                 },
-                //{
-                //    name: "Rename", icon: 'fa fa-font',
-                //    executeMethod: function () {
-                //        rename(getFirstChecked())
-                //    },
-                //    canExecuteMethod: isSingleChecked,
-                //    permission: 'platform:asset:update'
-                //},
                 {
                     name: "platform.commands.delete", icon: 'fas fa-trash-alt',
                     executeMethod: function () { deleteList($scope.gridApi.selection.getSelectedRows()); },
                     canExecuteMethod: isItemsChecked,
                     permission: 'platform:asset:delete'
                 }
-                //{
-                //    name: "Cut",
-                //    icon: 'fas fa-cut',
-                //    executeMethod: function () {
-                //    },
-                //    canExecuteMethod: isItemsChecked,
-                //    permission: 'asset:delete'
-                //},
-                //{
-                //    name: "Paste",
-                //    icon: 'fas fa-paste',
-                //    executeMethod: function () {
-                //        blade.isLoading = true;
-                //        assets.move({
-                //            folder: blade.currentEntity.url,
-                //            listEntries: $storage.catalogClipboardContent
-                //        }, function () {
-                //            delete $storage.catalogClipboardContent;
-                //            blade.refresh();
-                //        }, function (error) {
-                //            bladeNavigationService.setError('Error ' + error.status, blade);
-                //        });
-                //    },
-                //    canExecuteMethod: function () {
-                //        return $storage.catalogClipboardContent;
-                //    },
-                //    permission: 'asset:delete'
-                //}
             ];
 
             // ui-grid
