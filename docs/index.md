@@ -40,7 +40,7 @@ There are three modules that provide the Asset feature to the Platform:
 3. [vc-module-filesystem-assets](https://github.com/VirtoCommerce/vc-module-filesystem-assets): Provides File System implementation.
 
 ## Known Limitations
-1. **Azure Blob** - Folder Created and Modified Dates are loaded from Container. Because there is no folder option.
+1. **Azure Blob** - Both File Created and Modified Dates refer to the modify time. Folder Created and Modified Dates are loaded from Container. Because there is no folder option.
 2. **File Storage on Linux** - Both Created and Modified Dates refer to the modify time (which is preserved if the file is copied).
 
 
