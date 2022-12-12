@@ -64,7 +64,9 @@ namespace VirtoCommerce.AssetsModule.Web
                 using (var dbContext = serviceScope.ServiceProvider.GetRequiredService<AssetsDbContext>())
                 {
                     if (databaseProvider == "SqlServer")
+                    {
                         dbContext.Database.MigrateIfNotApplied("20000000000000_UpdateAssetsV3");
+                    }
 
                     dbContext.Database.EnsureCreated();
                     dbContext.Database.Migrate();
