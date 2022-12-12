@@ -4,8 +4,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using VirtoCommerce.AssetsModule.Core.Assets;
+using VirtoCommerce.AssetsModule.Data.MySql;
+using VirtoCommerce.AssetsModule.Data.PostgreSql;
 using VirtoCommerce.AssetsModule.Data.Repositories;
 using VirtoCommerce.AssetsModule.Data.Services;
+using VirtoCommerce.AssetsModule.Data.SqlServer;
 using VirtoCommerce.AssetsModule.Web.Swagger;
 using VirtoCommerce.Platform.Core.GenericCrud;
 using VirtoCommerce.Platform.Core.Modularity;
@@ -13,9 +16,10 @@ using VirtoCommerce.Platform.Data.Extensions;
 
 namespace VirtoCommerce.AssetsModule.Web
 {
-    public class Module : IModule
+    public class Module : IModule, IHasConfiguration
     {
         public ManifestModuleInfo ModuleInfo { get; set; }
+        public IConfiguration Configuration { get; set; }
 
         public void Initialize(IServiceCollection serviceCollection)
         {
@@ -26,9 +30,24 @@ namespace VirtoCommerce.AssetsModule.Web
 
             serviceCollection.AddDbContext<AssetsDbContext>((provider, options) =>
             {
-                var configuration = provider.GetRequiredService<IConfiguration>();
-                options.UseSqlServer(configuration.GetConnectionString(ModuleInfo.Id) ?? configuration.GetConnectionString("VirtoCommerce"));
+                var databaseProvider = Configuration.GetValue("DatabaseProvider", "SqlServer");
+                var connectionString = Configuration.GetConnectionString(ModuleInfo.Id) ?? Configuration.GetConnectionString("VirtoCommerce");
+
+                switch (databaseProvider)
+                {
+                    case "MySql":
+                        options.UseMySqlDatabase(connectionString);
+                        break;
+                    case "PostgreSql":
+                        options.UsePostgreSqlDatabase(connectionString);
+                        break;
+                    default:
+                        options.UseSqlServerDatabase(connectionString);
+                        break;
+                }
             });
+
+
             serviceCollection.AddTransient<IAssetsRepository, AssetsRepository>();
             serviceCollection.AddSingleton<Func<IAssetsRepository>>(provider => () => provider.CreateScope().ServiceProvider.GetRequiredService<IAssetsRepository>());
             serviceCollection.AddTransient<ICrudService<AssetEntry>, AssetEntryService>();
@@ -38,11 +57,15 @@ namespace VirtoCommerce.AssetsModule.Web
 
         public void PostInitialize(IApplicationBuilder appBuilder)
         {
+            var databaseProvider = Configuration.GetValue("DatabaseProvider", "SqlServer");
+
             using (var serviceScope = appBuilder.ApplicationServices.CreateScope())
             {
                 using (var dbContext = serviceScope.ServiceProvider.GetRequiredService<AssetsDbContext>())
                 {
-                    dbContext.Database.MigrateIfNotApplied("20000000000000_UpdateAssetsV3");
+                    if (databaseProvider == "SqlServer")
+                        dbContext.Database.MigrateIfNotApplied("20000000000000_UpdateAssetsV3");
+
                     dbContext.Database.EnsureCreated();
                     dbContext.Database.Migrate();
                 }

@@ -1,5 +1,6 @@
 using EntityFrameworkCore.Triggers;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection;
 using VirtoCommerce.AssetsModule.Data.Model;
 
 namespace VirtoCommerce.AssetsModule.Data.Repositories
@@ -25,7 +26,24 @@ namespace VirtoCommerce.AssetsModule.Data.Repositories
             modelBuilder.Entity<AssetEntryEntity>().HasIndex(x => new { x.RelativeUrl, x.Name })
                 .IsUnique(false)
                 .HasDatabaseName("IX_AssetEntry_RelativeUrl_Name");
+
             base.OnModelCreating(modelBuilder);
+
+
+            // Allows configuration for an entity type for different database types.
+            // Applies configuration from all <see cref="IEntityTypeConfiguration{TEntity}" in VirtoCommerce.AssetsModule.Data.XXX project. /> 
+            switch (this.Database.ProviderName)
+            {
+                case "Pomelo.EntityFrameworkCore.MySql":
+                    modelBuilder.ApplyConfigurationsFromAssembly(Assembly.Load("VirtoCommerce.AssetsModule.Data.MySql"));
+                    break;
+                case "Npgsql.EntityFrameworkCore.PostgreSQL":
+                    modelBuilder.ApplyConfigurationsFromAssembly(Assembly.Load("VirtoCommerce.AssetsModule.Data.PostgreSql"));
+                    break;
+                case "Microsoft.EntityFrameworkCore.SqlServer":
+                    modelBuilder.ApplyConfigurationsFromAssembly(Assembly.Load("VirtoCommerce.AssetsModule.Data.SqlServer"));
+                    break;
+            }
         }
 
     }

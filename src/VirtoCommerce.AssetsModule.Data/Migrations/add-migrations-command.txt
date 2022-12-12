@@ -1,1 +1,0 @@
-Add-Migration Initial -Context VirtoCommerce.AssetsModule.Data.Repositories.AssetsDbContext  -Verbose -OutputDir Migrations -Project VirtoCommerce.AssetsModule.Data  -Debug
