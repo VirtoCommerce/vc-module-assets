@@ -67,8 +67,6 @@ namespace VirtoCommerce.AssetsModule.Web
                     {
                         dbContext.Database.MigrateIfNotApplied("20000000000000_UpdateAssetsV3");
                     }
-
-                    dbContext.Database.EnsureCreated();
                     dbContext.Database.Migrate();
                 }
             }
