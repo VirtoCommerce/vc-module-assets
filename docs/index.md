@@ -1,6 +1,4 @@
-# Asset Management
-
-## Overview
+# Overview
 
 The *Assets* function is a basic feature of Virto's Platform. Technically, it is an abstraction or an internal programming interface that helps work with the Platform file system.
 
@@ -41,9 +39,18 @@ There are three modules that provide the Asset feature to the Platform:
 2. [vc-module-azureblob-assets](https://github.com/VirtoCommerce/vc-module-azureblob-assets): Provides Azure Blob Storage implementation.
 3. [vc-module-filesystem-assets](https://github.com/VirtoCommerce/vc-module-filesystem-assets): Provides File System implementation.
 
+## Known Limitations
+1. **Azure Blob** - Both File Created and Modified Dates refer to the modify time. Folder Created and Modified Dates are loaded from Container. Because there is no folder option.
+2. **File Storage on Linux** - Both Created and Modified Dates refer to the modify time (which is preserved if the file is copied).
+
+
+## Configuration
+
 To switch between the implementations, follow these steps:
+
 1. Open **appsettings.json** for the Virto Commerce Platform instance.
 2. Navigate to the **Assets** node:
+3. 
 ```json
     "Assets": {
         "Provider": "FileSystem",

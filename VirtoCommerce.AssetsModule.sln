@@ -15,6 +15,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{391858D8
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VirtoCommerce.AssetsModule.Tests", "tests\VirtoCommerce.AssetsModule.Tests\VirtoCommerce.AssetsModule.Tests.csproj", "{0877F2EF-54D4-41AB-848B-B24105816AE1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VirtoCommerce.AssetsModule.Data.SqlServer", "src\VirtoCommerce.AssetsModule.Data.SqlServer\VirtoCommerce.AssetsModule.Data.SqlServer.csproj", "{4FD06ACA-DCDE-403D-BBA7-5775D2B550D0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VirtoCommerce.AssetsModule.Data.MySql", "src\VirtoCommerce.AssetsModule.Data.MySql\VirtoCommerce.AssetsModule.Data.MySql.csproj", "{6E6D17B8-7548-4394-9BFC-2D0D54E56A36}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VirtoCommerce.AssetsModule.Data.PostgreSql", "src\VirtoCommerce.AssetsModule.Data.PostgreSql\VirtoCommerce.AssetsModule.Data.PostgreSql.csproj", "{D7498CF9-9081-4D7E-8B37-F9F8C6D8FD06}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,6 +43,18 @@ Global
 		{0877F2EF-54D4-41AB-848B-B24105816AE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0877F2EF-54D4-41AB-848B-B24105816AE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0877F2EF-54D4-41AB-848B-B24105816AE1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4FD06ACA-DCDE-403D-BBA7-5775D2B550D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4FD06ACA-DCDE-403D-BBA7-5775D2B550D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4FD06ACA-DCDE-403D-BBA7-5775D2B550D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4FD06ACA-DCDE-403D-BBA7-5775D2B550D0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6E6D17B8-7548-4394-9BFC-2D0D54E56A36}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E6D17B8-7548-4394-9BFC-2D0D54E56A36}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E6D17B8-7548-4394-9BFC-2D0D54E56A36}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E6D17B8-7548-4394-9BFC-2D0D54E56A36}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D7498CF9-9081-4D7E-8B37-F9F8C6D8FD06}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D7498CF9-9081-4D7E-8B37-F9F8C6D8FD06}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D7498CF9-9081-4D7E-8B37-F9F8C6D8FD06}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D7498CF9-9081-4D7E-8B37-F9F8C6D8FD06}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -45,6 +63,9 @@ Global
 		{BF709064-606D-4771-899D-19A1BA9CAA4B} = {4FD6A475-8E27-4933-A76F-38CD0A10663F}
 		{5C70500F-E17A-4B38-B189-5DA06D52955A} = {4FD6A475-8E27-4933-A76F-38CD0A10663F}
 		{0877F2EF-54D4-41AB-848B-B24105816AE1} = {391858D8-CE02-421D-912A-30235E849753}
+		{4FD06ACA-DCDE-403D-BBA7-5775D2B550D0} = {4FD6A475-8E27-4933-A76F-38CD0A10663F}
+		{6E6D17B8-7548-4394-9BFC-2D0D54E56A36} = {4FD6A475-8E27-4933-A76F-38CD0A10663F}
+		{D7498CF9-9081-4D7E-8B37-F9F8C6D8FD06} = {4FD6A475-8E27-4933-A76F-38CD0A10663F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {510B9129-5391-4DEE-89B5-0AF8EFD88A4A}

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using VirtoCommerce.AssetsModule.Data.Repositories;
 
-namespace VirtoCommerce.AssetsModule.Data.Migrations
+namespace VirtoCommerce.AssetsModule.Data.SqlServer.Migrations
 {
     [DbContext(typeof(AssetsDbContext))]
     [Migration("20000000000000_UpdateAssetsV3")]
