@@ -28,6 +28,9 @@
       <PackageReference Include="VirtoCommerce.Platform.Hangfire" Version="3.200.0" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\VirtoCommerce.AssetsModule.Data.MySql\VirtoCommerce.AssetsModule.Data.MySql.csproj" />
+    <ProjectReference Include="..\VirtoCommerce.AssetsModule.Data.PostgreSql\VirtoCommerce.AssetsModule.Data.PostgreSql.csproj" />
+    <ProjectReference Include="..\VirtoCommerce.AssetsModule.Data.SqlServer\VirtoCommerce.AssetsModule.Data.SqlServer.csproj" />
     <ProjectReference Include="..\VirtoCommerce.AssetsModule.Data\VirtoCommerce.AssetsModule.Data.csproj" />
   </ItemGroup>
   <ItemGroup>

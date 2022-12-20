@@ -16,7 +16,7 @@
   <iconUrl>Modules/$(VirtoCommerce.AssetsModule)/Content/logo.png</iconUrl>
   <requireLicenseAcceptance>false</requireLicenseAcceptance>
   <releaseNotes />
-  <copyright>Copyright © 2021 Virto Commerce. All rights reserved</copyright>
+  <copyright>Copyright © 2023 Virto Commerce. All rights reserved</copyright>
   <tags>assets</tags>
   <assemblyFile>VirtoCommerce.AssetsModule.Web.dll</assemblyFile>
   <moduleType>VirtoCommerce.AssetsModule.Web.Module, VirtoCommerce.AssetsModule.Web</moduleType>

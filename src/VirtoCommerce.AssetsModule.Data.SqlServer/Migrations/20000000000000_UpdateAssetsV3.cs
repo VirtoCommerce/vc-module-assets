@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace VirtoCommerce.AssetsModule.Data.Migrations
+namespace VirtoCommerce.AssetsModule.Data.SqlServer.Migrations
 {
     public partial class UpdateAssetsV3 : Migration
     {
