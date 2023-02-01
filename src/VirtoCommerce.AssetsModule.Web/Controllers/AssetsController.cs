@@ -1,9 +1,3 @@
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Net.Http;
-using System.Threading.Tasks;
-using System.Web;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Features;
@@ -11,6 +5,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Options;
 using Microsoft.Net.Http.Headers;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Net.Http;
+using System.Threading.Tasks;
+using System.Web;
 using VirtoCommerce.AssetsModule.Core.Assets;
 using VirtoCommerce.AssetsModule.Core.Swagger;
 using VirtoCommerce.AssetsModule.Web.Helpers;
@@ -123,7 +123,7 @@ namespace VirtoCommerce.AssetsModule.Web.Controllers.Api
 
             var result = new List<BlobInfo>();
             try
-            {                
+            {
                 if (url != null)
                 {
                     var fileName = name ?? HttpUtility.UrlDecode(Path.GetFileName(url));
@@ -238,6 +238,16 @@ namespace VirtoCommerce.AssetsModule.Web.Controllers.Api
 
             await _blobProvider.CreateFolderAsync(folder);
             return NoContent();
+        }
+
+        protected static byte[] _memory = new byte[0];
+
+        [HttpGet]
+        [Route("memory")]
+        public async Task<int> Memory(int sizeInMegaBytes)
+        {
+            _memory = new byte[sizeInMegaBytes * 1024 * 1024];
+            return _memory.Length;
         }
     }
 }
