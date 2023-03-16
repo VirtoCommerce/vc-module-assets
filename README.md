@@ -1,22 +1,27 @@
-# Virto Commerce Assets Module
+# Virto Commerce Assets Management Module
 [![CI status](https://github.com/VirtoCommerce/vc-module-assets/workflows/Module%20CI/badge.svg?branch=dev)](https://github.com/VirtoCommerce/vc-module-assets/actions?query=workflow%3A"Module+CI") [![Quality gate](https://sonarcloud.io/api/project_badges/measure?project=VirtoCommerce_vc-module-assets&metric=alert_status&branch=dev)](https://sonarcloud.io/dashboard?id=VirtoCommerce_vc-module-assets) [![Reliability rating](https://sonarcloud.io/api/project_badges/measure?project=VirtoCommerce_vc-module-assets&metric=reliability_rating&branch=dev)](https://sonarcloud.io/dashboard?id=VirtoCommerce_vc-module-assets) [![Security rating](https://sonarcloud.io/api/project_badges/measure?project=VirtoCommerce_vc-module-assets&metric=security_rating&branch=dev)](https://sonarcloud.io/dashboard?id=VirtoCommerce_vc-module-assets) [![Sqale rating](https://sonarcloud.io/api/project_badges/measure?project=VirtoCommerce_vc-module-assets&metric=sqale_rating&branch=dev)](https://sonarcloud.io/dashboard?id=VirtoCommerce_vc-module-assets)
 
 ## Overview
+The Virto Assets Management module is a base module that provides a powerful, flexible, and extensible platform for managing assets in Virto Commerce. 
+With this module, you can easily search, organize, and retrieve assets stored in different locations, including file systems, Azure storage, and other custom asset storage solutions.
 
-The *Assets* function is a basic feature of Virto's Platform. Technically, it is an abstraction or an internal programming interface that helps work with the Platform file system.
+The module is designed to be highly configurable and extensible, allowing developers to easily add new asset storage providers or customize existing ones to meet the unique needs of their business. It defines a set of common abstractions for asset search, retrieval, and manipulation, making it easy for developers to work with assets regardless of their underlying storage location.
 
 ***Note:*** *You cannot work with the Platform files directly; the only way to do so is through the Assets abstraction.*
 
-The Assets programming interface allows you to:
+Virto Commerce has out-of-the box providers:
+* [File System](https://github.com/VirtoCommerce/vc-module-filesystem-assets)
+* [Azure Blob Storage](https://github.com/VirtoCommerce/vc-module-azureblob-assets)
 
+## Key Features
 1. Upload files
 2. Read files
 3. Search files
 
-Asset Management also has a user interface that constitutes File Manager or File Dictionary. All Platform modules have access to this dictionary through the programming interface, and all folders in Assets are created with Platform modules.
+Asset Management also has a user interface that constitutes File Manager or File Dictionary. 
+All Platform modules have access to this dictionary through the programming interface, and all folders in Assets are created with Platform modules.
 Each Platform module works with its own folder located in Assets.
 
-Asset Management can be implemented both on a physical disc or on Azure Blob Storage.
 
 ![Assets](docs/media/screen-assets.png)
 
@@ -36,7 +41,7 @@ You can upload the file using one of the following ways:
 
 ## Asset Modules
 
-There are three modules that provide the Asset feature to the Platform:
+There are three modules that provide the Assets Management feature:
 
 1. [vc-module-assets](https://github.com/VirtoCommerce/vc-module-assets): Provides basic infrastructure for asset storage and includes core assets abstractions, base provider class, and UI elements.
 2. [vc-module-azureblob-assets](https://github.com/VirtoCommerce/vc-module-azureblob-assets): Provides Azure Blob Storage implementation.
