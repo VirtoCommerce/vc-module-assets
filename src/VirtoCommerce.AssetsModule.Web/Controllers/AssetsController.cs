@@ -20,6 +20,8 @@ using VirtoCommerce.Platform.Core.Common;
 using VirtoCommerce.Platform.Core.Exceptions;
 using VirtoCommerce.Platform.Data.Helpers;
 
+using UrlHelpers = VirtoCommerce.Platform.Core.Extensions.UrlHelperExtensions;
+
 namespace VirtoCommerce.AssetsModule.Web.Controllers.Api
 {
     [Route("api/assets")]
@@ -123,11 +125,11 @@ namespace VirtoCommerce.AssetsModule.Web.Controllers.Api
 
             var result = new List<BlobInfo>();
             try
-            {                
+            {
                 if (url != null)
                 {
                     var fileName = name ?? HttpUtility.UrlDecode(Path.GetFileName(url));
-                    var fileUrl = folderUrl + "/" + fileName;
+                    var fileUrl = UrlHelpers.Combine(folderUrl ?? "", fileName);
                     using (var client = _httpClientFactory.CreateClient())
                     using (var blobStream = _blobProvider.OpenWrite(fileUrl))
                     using (var remoteStream = await client.GetStreamAsync(url))
@@ -153,7 +155,7 @@ namespace VirtoCommerce.AssetsModule.Web.Controllers.Api
                         if (hasContentDispositionHeader && MultipartRequestHelper.HasFileContentDisposition(contentDisposition))
                         {
                             var fileName = contentDisposition.FileName.Value;
-                            var targetFilePath = folderUrl + "/" + fileName;
+                            var targetFilePath = UrlHelpers.Combine(folderUrl ?? "", fileName);
 
                             using (var targetStream = _blobProvider.OpenWrite(targetFilePath))
                             {
