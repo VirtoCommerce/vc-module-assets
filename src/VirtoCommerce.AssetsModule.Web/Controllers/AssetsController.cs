@@ -22,7 +22,7 @@ using VirtoCommerce.Platform.Data.Helpers;
 
 using UrlHelpers = VirtoCommerce.Platform.Core.Extensions.UrlHelperExtensions;
 
-namespace VirtoCommerce.AssetsModule.Web.Controllers.Api
+namespace VirtoCommerce.AssetsModule.Web.Controllers
 {
     [Route("api/assets")]
     public class AssetsController : Controller

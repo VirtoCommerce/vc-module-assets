@@ -9,7 +9,7 @@ namespace VirtoCommerce.AssetsModule.Web.Validators
         public BlobFolderValidator()
         {
             RuleFor(context => context.Name)
-                .Cascade(CascadeMode.StopOnFirstFailure)
+                .Cascade(CascadeMode.Stop)
                 .NotNull()
                 .WithMessage("Folder name must not be null.")
                 .NotEmpty()
@@ -25,7 +25,7 @@ namespace VirtoCommerce.AssetsModule.Web.Validators
                 .Must(x => !x.Contains("--"))
                 .WithMessage("Folder name must not contain consecutive dash symbols.")
                 .Must(x => !new Regex("[^0-9a-z -]").IsMatch(x))
-                .WithMessage("Folder name must not contain specsymbols.");
+                .WithMessage("Folder name must not contain special symbols.");
         }
     }
 }

@@ -122,7 +122,7 @@ namespace VirtoCommerce.AssetsModule.Tests.Validators
         [InlineData("cache$$$")]
         [InlineData("dash===>")]
         [InlineData("lash:(")]
-        public void BlobFolder_Name_ContainsSpecialСharacters_ShouldFail(string name)
+        public void BlobFolder_Name_ContainsSpecialCharacters_ShouldFail(string name)
         {
             // Arrange
             var instance = new BlobFolder
@@ -135,7 +135,7 @@ namespace VirtoCommerce.AssetsModule.Tests.Validators
 
             // Assert
             result.IsValid.Should().BeFalse();
-            result.Errors.Should().ContainSingle(x => x.PropertyName == "Name" && x.ErrorMessage.Contains("specsymbols"));
+            result.Errors.Should().ContainSingle(x => x.PropertyName == "Name" && x.ErrorMessage.Contains("special symbols"));
         }
 
         [Fact]
