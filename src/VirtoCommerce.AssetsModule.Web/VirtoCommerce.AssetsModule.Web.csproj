@@ -8,9 +8,6 @@
     <!--This line is necessary to copy all dependencies in the bin folder-->
     <!--<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>-->
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <NoWarn>1701;1702;1705;1591</NoWarn>
-  </PropertyGroup>
   <ItemGroup>
     <Compile Remove="dist\**" />
     <Compile Remove="node_modules\**" />
@@ -20,22 +17,14 @@
     <None Remove="node_modules\**" />
   </ItemGroup>
   <ItemGroup>
-      <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="5.6.3" />
-      <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="6.0.0" />
-      <PackageReference Include="Microsoft.Extensions.DependencyModel" Version="6.0.0" />
-      <PackageReference Include="VirtoCommerce.Platform.Core" Version="3.200.0" />
-      <PackageReference Include="VirtoCommerce.Platform.Data" Version="3.200.0" />
-      <PackageReference Include="VirtoCommerce.Platform.Hangfire" Version="3.200.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="5.6.3" />
+    <PackageReference Include="Microsoft.Extensions.DependencyModel" Version="6.0.0" />
+    <PackageReference Include="VirtoCommerce.Platform.Hangfire" Version="3.400.0" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\VirtoCommerce.AssetsModule.Data.MySql\VirtoCommerce.AssetsModule.Data.MySql.csproj" />
     <ProjectReference Include="..\VirtoCommerce.AssetsModule.Data.PostgreSql\VirtoCommerce.AssetsModule.Data.PostgreSql.csproj" />
     <ProjectReference Include="..\VirtoCommerce.AssetsModule.Data.SqlServer\VirtoCommerce.AssetsModule.Data.SqlServer.csproj" />
     <ProjectReference Include="..\VirtoCommerce.AssetsModule.Data\VirtoCommerce.AssetsModule.Data.csproj" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Controllers\" />
-    <Folder Include="Filters\" />
-    <Folder Include="Validators\" />
   </ItemGroup>
 </Project>
