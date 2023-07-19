@@ -22,23 +22,24 @@ using VirtoCommerce.Platform.Data.Helpers;
 
 using UrlHelpers = VirtoCommerce.Platform.Core.Extensions.UrlHelperExtensions;
 
-namespace VirtoCommerce.AssetsModule.Web.Controllers.Api
+namespace VirtoCommerce.AssetsModule.Web.Controllers
 {
     [Route("api/assets")]
     public class AssetsController : Controller
     {
         private readonly IBlobStorageProvider _blobProvider;
         private readonly IBlobUrlResolver _urlResolver;
-        private static readonly FormOptions _defaultFormOptions = new FormOptions();
         private readonly PlatformOptions _platformOptions;
         private readonly IHttpClientFactory _httpClientFactory;
+
+        private static readonly FormOptions _defaultFormOptions = new();
 
         public AssetsController(IBlobStorageProvider blobProvider, IBlobUrlResolver urlResolver, IOptions<PlatformOptions> platformOptions, IHttpClientFactory httpClientFactory)
         {
             _blobProvider = blobProvider;
             _urlResolver = urlResolver;
-            _httpClientFactory = httpClientFactory;
             _platformOptions = platformOptions.Value;
+            _httpClientFactory = httpClientFactory;
         }
 
         /// <summary>
@@ -97,6 +98,7 @@ namespace VirtoCommerce.AssetsModule.Web.Controllers.Api
                     result.Add(blobInfo);
                 }
             }
+
             return Ok(result.ToArray());
         }
 
@@ -131,7 +133,7 @@ namespace VirtoCommerce.AssetsModule.Web.Controllers.Api
                     var fileName = name ?? HttpUtility.UrlDecode(Path.GetFileName(url));
                     var fileUrl = UrlHelpers.Combine(folderUrl ?? "", fileName);
                     using (var client = _httpClientFactory.CreateClient())
-                    using (var blobStream = _blobProvider.OpenWrite(fileUrl))
+                    using (var blobStream = await _blobProvider.OpenWriteAsync(fileUrl))
                     using (var remoteStream = await client.GetStreamAsync(url))
                     {
                         await remoteStream.CopyToAsync(blobStream);
@@ -157,7 +159,7 @@ namespace VirtoCommerce.AssetsModule.Web.Controllers.Api
                             var fileName = contentDisposition.FileName.Value;
                             var targetFilePath = UrlHelpers.Combine(folderUrl ?? "", fileName);
 
-                            using (var targetStream = _blobProvider.OpenWrite(targetFilePath))
+                            using (var targetStream = await _blobProvider.OpenWriteAsync(targetFilePath))
                             {
                                 await section.Body.CopyToAsync(targetStream);
                             }
@@ -171,13 +173,11 @@ namespace VirtoCommerce.AssetsModule.Web.Controllers.Api
                         }
                     }
                 }
-
             }
             catch (PlatformException exc)
             {
                 return new ObjectResult(new { exc.Message }) { StatusCode = StatusCodes.Status405MethodNotAllowed };
             }
-
 
             return Ok(result.ToArray());
         }
@@ -194,7 +194,9 @@ namespace VirtoCommerce.AssetsModule.Web.Controllers.Api
         public async Task<ActionResult> DeleteBlobsAsync([FromQuery] string[] urls)
         {
             if (urls.IsNullOrEmpty())
+            {
                 return BadRequest("Please, specify at least one asset URL to delete.");
+            }
 
             await _blobProvider.RemoveAsync(urls);
             return NoContent();
@@ -227,7 +229,7 @@ namespace VirtoCommerce.AssetsModule.Web.Controllers.Api
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult> CreateBlobFolderAsync([FromBody] BlobFolder folder)
         {
-            var validation = new BlobFolderValidator().Validate(folder);
+            var validation = await new BlobFolderValidator().ValidateAsync(folder);
 
             if (!validation.IsValid)
             {

@@ -1,21 +1,21 @@
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using VirtoCommerce.AssetsModule.Core.Assets;
+using VirtoCommerce.AssetsModule.Core.Services;
 using VirtoCommerce.Platform.Core;
-using VirtoCommerce.Platform.Core.GenericCrud;
+using VirtoCommerce.Platform.Core.Common;
 
-namespace VirtoCommerce.AssetsModule.Web.Controllers.Api
+namespace VirtoCommerce.AssetsModule.Web.Controllers
 {
     [Route("api/assetentries")]
     public class AssetEntryController : Controller
     {
-        private readonly ICrudService<AssetEntry> _assetService;
-        private readonly ISearchService<AssetEntrySearchCriteria, AssetEntrySearchResult, AssetEntry> _assetSearchService;
+        private readonly IAssetEntryService _assetService;
+        private readonly IAssetEntrySearchService _assetSearchService;
 
-        public AssetEntryController(ICrudService<AssetEntry> assetService, ISearchService<AssetEntrySearchCriteria, AssetEntrySearchResult, AssetEntry> assetSearchService)
+        public AssetEntryController(IAssetEntryService assetService, IAssetEntrySearchService assetSearchService)
         {
             _assetService = assetService;
             _assetSearchService = assetSearchService;
@@ -29,7 +29,7 @@ namespace VirtoCommerce.AssetsModule.Web.Controllers.Api
         [HttpPost]
         [Route("search")]
         [Authorize(PlatformConstants.Security.Permissions.AssetAccess)]
-        public async Task<ActionResult<AssetEntrySearchResult>> Search([FromBody]AssetEntrySearchCriteria criteria)
+        public async Task<ActionResult<AssetEntrySearchResult>> Search([FromBody] AssetEntrySearchCriteria criteria)
         {
             var result = await _assetSearchService.SearchAsync(criteria);
             return Ok(result);
@@ -41,15 +41,15 @@ namespace VirtoCommerce.AssetsModule.Web.Controllers.Api
         [HttpGet]
         [Route("{id}")]
         [Authorize(PlatformConstants.Security.Permissions.AssetRead)]
-        public async Task<ActionResult<AssetEntry>> Get([FromQuery]string id)
+        public async Task<ActionResult<AssetEntry>> Get([FromQuery] string id)
         {
-            var result = await _assetService.GetByIdsAsync(new[] { id });
-            if (result?.Any() == true)
+            var result = await _assetService.GetNoCloneAsync(id);
+            if (result == null)
             {
-                return Ok(result.Single());
+                return NotFound();
             }
 
-            return NotFound();
+            return Ok(result);
         }
 
         /// <summary>
@@ -59,7 +59,7 @@ namespace VirtoCommerce.AssetsModule.Web.Controllers.Api
         [Route("")]
         [Authorize(PlatformConstants.Security.Permissions.AssetUpdate)]
         [ProducesResponseType(typeof(void), StatusCodes.Status204NoContent)]
-        public async Task<ActionResult> Update([FromBody]AssetEntry item)
+        public async Task<ActionResult> Update([FromBody] AssetEntry item)
         {
             await _assetService.SaveChangesAsync(new[] { item });
             return NoContent();

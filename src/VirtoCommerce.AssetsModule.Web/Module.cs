@@ -1,16 +1,15 @@
+using System;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using VirtoCommerce.AssetsModule.Core.Assets;
+using VirtoCommerce.AssetsModule.Core.Services;
 using VirtoCommerce.AssetsModule.Data.MySql;
 using VirtoCommerce.AssetsModule.Data.PostgreSql;
 using VirtoCommerce.AssetsModule.Data.Repositories;
 using VirtoCommerce.AssetsModule.Data.Services;
 using VirtoCommerce.AssetsModule.Data.SqlServer;
 using VirtoCommerce.AssetsModule.Web.Swagger;
-using VirtoCommerce.Platform.Core.GenericCrud;
 using VirtoCommerce.Platform.Core.Modularity;
 using VirtoCommerce.Platform.Data.Extensions;
 
@@ -47,12 +46,10 @@ namespace VirtoCommerce.AssetsModule.Web
                 }
             });
 
-
             serviceCollection.AddTransient<IAssetsRepository, AssetsRepository>();
             serviceCollection.AddSingleton<Func<IAssetsRepository>>(provider => () => provider.CreateScope().ServiceProvider.GetRequiredService<IAssetsRepository>());
-            serviceCollection.AddTransient<ICrudService<AssetEntry>, AssetEntryService>();
-            serviceCollection.AddTransient<ISearchService<AssetEntrySearchCriteria, AssetEntrySearchResult, AssetEntry>, AssetEntrySearchService>();
-
+            serviceCollection.AddTransient<IAssetEntryService, AssetEntryService>();
+            serviceCollection.AddTransient<IAssetEntrySearchService, AssetEntrySearchService>();
         }
 
         public void PostInitialize(IApplicationBuilder appBuilder)
@@ -70,14 +67,11 @@ namespace VirtoCommerce.AssetsModule.Web
                     dbContext.Database.Migrate();
                 }
             }
-
         }
 
         public void Uninstall()
         {
             //Nothing special here
         }
-
-
     }
 }

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -15,10 +14,10 @@ namespace VirtoCommerce.AssetsModule.Data.Repositories
             : base(dbContext)
         {
         }
-       
+
         public IQueryable<AssetEntryEntity> AssetEntries => DbContext.Set<AssetEntryEntity>();
 
-        public async Task<ICollection<AssetEntryEntity>> GetAssetsByIdsAsync(IEnumerable<string> ids)
+        public async Task<IList<AssetEntryEntity>> GetAssetsByIdsAsync(IList<string> ids)
         {
             if (ids.IsNullOrEmpty())
             {

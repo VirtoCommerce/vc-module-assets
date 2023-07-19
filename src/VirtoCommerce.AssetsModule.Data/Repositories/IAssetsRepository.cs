@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -10,6 +9,6 @@ namespace VirtoCommerce.AssetsModule.Data.Repositories
     public interface IAssetsRepository : IRepository
     {
         IQueryable<AssetEntryEntity> AssetEntries { get; }
-        Task<ICollection<AssetEntryEntity>> GetAssetsByIdsAsync(IEnumerable<string> ids);
+        Task<IList<AssetEntryEntity>> GetAssetsByIdsAsync(IList<string> ids);
     }
 }
