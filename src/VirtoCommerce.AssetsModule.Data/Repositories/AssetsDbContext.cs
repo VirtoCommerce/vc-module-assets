@@ -1,11 +1,11 @@
-using EntityFrameworkCore.Triggers;
-using Microsoft.EntityFrameworkCore;
 using System.Reflection;
+using Microsoft.EntityFrameworkCore;
 using VirtoCommerce.AssetsModule.Data.Model;
+using VirtoCommerce.Platform.Data.Infrastructure;
 
 namespace VirtoCommerce.AssetsModule.Data.Repositories
 {
-    public class AssetsDbContext : DbContextWithTriggers
+    public class AssetsDbContext : DbContextBase
     {
         public AssetsDbContext(DbContextOptions<AssetsDbContext> options)
             : base(options)
