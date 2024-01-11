@@ -47,6 +47,8 @@ namespace VirtoCommerce.AssetsModule.Data.Model
             if (model == null)
                 throw new ArgumentNullException(nameof(model));
 
+            pkMap.AddPair(model, this);
+
             LanguageCode = model.LanguageCode;
             Name = model.BlobInfo.Name;
             MimeType = model.BlobInfo.ContentType;
@@ -79,12 +81,12 @@ namespace VirtoCommerce.AssetsModule.Data.Model
             }
             asset.BlobInfo.Name = Name;
             asset.BlobInfo.ContentType = MimeType;
-            asset.BlobInfo.RelativeUrl = RelativeUrl;            
+            asset.BlobInfo.RelativeUrl = RelativeUrl;
             asset.BlobInfo.Size = Size;
 
             if (asset.Tenant == null)
             {
-                asset.Tenant = AbstractTypeFactory<TenantIdentity>.TryCreateInstance();
+                asset.Tenant = TenantIdentity.Empty;
             }
             asset.Tenant.Id = TenantId;
             asset.Tenant.Type = TenantType;
