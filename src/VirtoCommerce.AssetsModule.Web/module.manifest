@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <module xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <id>VirtoCommerce.Assets</id>
-  <version>3.402.0</version>
+  <version>3.800.0</version>
   <version-tag />
-  <platformVersion>3.400.0</platformVersion>
+  <platformVersion>3.800.0</platformVersion>
   <dependencies />
   <title>Assets Management</title>
   <description>Common abstractions for asset search, retrieval, and manipulation, making it easy for developers to work with assets regardless of their underlying storage location.</description>
@@ -17,7 +17,7 @@
   <iconUrl>Modules/$(VirtoCommerce.AssetsModule)/Content/logo.png</iconUrl>
   <requireLicenseAcceptance>false</requireLicenseAcceptance>
   <releaseNotes />
-  <copyright>Copyright © 2023 Virto Commerce. All rights reserved</copyright>
+  <copyright>Copyright © 2011-2024 Virto Commerce. All rights reserved</copyright>
   <tags>assets</tags>
   <assemblyFile>VirtoCommerce.AssetsModule.Web.dll</assemblyFile>
   <moduleType>VirtoCommerce.AssetsModule.Web.Module, VirtoCommerce.AssetsModule.Web</moduleType>
