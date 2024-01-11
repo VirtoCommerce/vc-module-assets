@@ -17,9 +17,9 @@
     <None Remove="node_modules\**" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="6.2.1" />
+    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="6.5.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyModel" Version="8.0.0" />
-    <PackageReference Include="VirtoCommerce.Platform.Hangfire" Version="3.800.0-alpha.12824-net8" />
+    <PackageReference Include="VirtoCommerce.Platform.Hangfire" Version="3.800.0" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\VirtoCommerce.AssetsModule.Data.MySql\VirtoCommerce.AssetsModule.Data.MySql.csproj" />
