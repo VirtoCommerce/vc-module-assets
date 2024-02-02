@@ -25,8 +25,8 @@ public class FileExtensionService : IFileExtensionService
         _platformOptions = platformOptions.Value;
         _settingsManager = settingsManager;
 
-        _whiteList ??= GetWhiteList().GetAwaiter().GetResult();
-        _blackList ??= GetBlackList().GetAwaiter().GetResult();
+        _whiteList = GetWhiteList().GetAwaiter().GetResult();
+        _blackList = GetBlackList().GetAwaiter().GetResult();
     }
 
     public IList<string> WhiteList => _whiteList;
