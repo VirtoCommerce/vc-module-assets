@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Options;
 using VirtoCommerce.Platform.Core;
 using VirtoCommerce.Platform.Core.Settings;
-using VirtoCommerce.Platform.Core.Settings.Events;
 
 namespace VirtoCommerce.AssetsModule.Core.Services;
 
@@ -14,8 +13,6 @@ public class FileExtensionService : IFileExtensionService
     private readonly StringComparer _ignoreCase = StringComparer.OrdinalIgnoreCase;
     private readonly string _whiteListSettingName = PlatformConstants.Settings.Security.FileExtensionsWhiteList.Name;
     private readonly string _blackListSettingName = PlatformConstants.Settings.Security.FileExtensionsBlackList.Name;
-    private static IList<string> _whiteList;
-    private static IList<string> _blackList;
 
     private readonly ISettingsManager _settingsManager;
     private readonly PlatformOptions _platformOptions;
@@ -24,64 +21,32 @@ public class FileExtensionService : IFileExtensionService
     {
         _platformOptions = platformOptions.Value;
         _settingsManager = settingsManager;
-
-        _whiteList = GetWhiteList().GetAwaiter().GetResult();
-        _blackList = GetBlackList().GetAwaiter().GetResult();
     }
 
-    public IList<string> WhiteList => _whiteList;
-    public IList<string> BlackList => _blackList;
-
-    public virtual bool IsExtensionAllowed(string extension)
+    public virtual async Task<bool> IsExtensionAllowedAsync(string extension)
     {
-        if (WhiteList.Count != 0)
+        var whiteList = await GetWhiteListAsync();
+        if (whiteList.Count != 0)
         {
-            return WhiteList.Contains(extension, _ignoreCase);
+            return whiteList.Contains(extension, _ignoreCase);
         }
 
-        return BlackList.Count == 0 || !BlackList.Contains(extension, _ignoreCase);
+        var blackList = await GetBlackListAsync();
+        return blackList.Count == 0 || !blackList.Contains(extension, _ignoreCase);
     }
 
-    public virtual async Task Handle(ObjectSettingChangedEvent message)
+
+    public Task<IList<string>> GetWhiteListAsync()
     {
-        var whiteListChanged = false;
-        var blackListChanged = false;
-
-        foreach (var changedEntry in message.ChangedEntries)
-        {
-            if (changedEntry.NewEntry.Name == _whiteListSettingName)
-            {
-                whiteListChanged = true;
-            }
-            else if (changedEntry.NewEntry.Name == _blackListSettingName)
-            {
-                blackListChanged = true;
-            }
-        }
-
-        if (whiteListChanged)
-        {
-            _whiteList = await GetWhiteList();
-        }
-
-        if (blackListChanged)
-        {
-            _blackList = await GetBlackList();
-        }
+        return CombineSettingValuesAsync(_whiteListSettingName, _platformOptions.FileExtensionsWhiteList);
     }
 
-
-    protected Task<IList<string>> GetWhiteList()
+    public Task<IList<string>> GetBlackListAsync()
     {
-        return CombineSettingValues(_whiteListSettingName, _platformOptions.FileExtensionsWhiteList);
+        return CombineSettingValuesAsync(_blackListSettingName, _platformOptions.FileExtensionsBlackList);
     }
 
-    protected Task<IList<string>> GetBlackList()
-    {
-        return CombineSettingValues(_blackListSettingName, _platformOptions.FileExtensionsBlackList);
-    }
-
-    protected async Task<IList<string>> CombineSettingValues(string settingName, IList<string> otherValues)
+    protected async Task<IList<string>> CombineSettingValuesAsync(string settingName, IList<string> otherValues)
     {
         var setting = await _settingsManager.GetObjectSettingAsync(settingName);
 

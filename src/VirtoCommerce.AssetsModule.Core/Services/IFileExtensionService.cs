@@ -1,12 +1,11 @@
 using System.Collections.Generic;
-using VirtoCommerce.Platform.Core.Events;
-using VirtoCommerce.Platform.Core.Settings.Events;
+using System.Threading.Tasks;
 
 namespace VirtoCommerce.AssetsModule.Core.Services;
 
-public interface IFileExtensionService : IEventHandler<ObjectSettingChangedEvent>
+public interface IFileExtensionService
 {
-    public IList<string> WhiteList { get; }
-    public IList<string> BlackList { get; }
-    bool IsExtensionAllowed(string extension);
+    Task<IList<string>> GetWhiteListAsync();
+    Task<IList<string>> GetBlackListAsync();
+    Task<bool> IsExtensionAllowedAsync(string extension);
 }

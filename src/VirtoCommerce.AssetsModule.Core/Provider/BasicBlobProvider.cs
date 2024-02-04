@@ -10,7 +10,7 @@ namespace VirtoCommerce.AssetsModule.Core.Assets
     [Obsolete("Use IFileExtensionService", DiagnosticId = "VC0008", UrlFormat = "https://docs.virtocommerce.org/products/products-virto3-versions/")]
     public abstract class BasicBlobProvider
     {
-        private readonly IFileExtensionService _fileExtensionService;
+        private readonly FileExtensionService _fileExtensionService;
 
         protected BasicBlobProvider(IOptions<PlatformOptions> platformOptions, ISettingsManager settingsManager)
         {
@@ -20,7 +20,7 @@ namespace VirtoCommerce.AssetsModule.Core.Assets
         public virtual bool IsExtensionBlacklisted(string path)
         {
             var extension = Path.GetExtension(path);
-            var allowed = _fileExtensionService.IsExtensionAllowed(extension);
+            var allowed = _fileExtensionService.IsExtensionAllowedAsync(extension).GetAwaiter().GetResult();
             return !allowed;
         }
     }
