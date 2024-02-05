@@ -1,9 +1,9 @@
-﻿using FluentAssertions;
+using FluentAssertions;
 using Microsoft.Extensions.Options;
-using VirtoCommerce.Platform.Core;
-using Xunit;
 using Moq;
+using VirtoCommerce.Platform.Core;
 using VirtoCommerce.Platform.Core.Settings;
+using Xunit;
 using static VirtoCommerce.Platform.Core.PlatformConstants.Settings;
 
 namespace VirtoCommerce.AssetsModule.Tests.Provider
@@ -84,7 +84,7 @@ namespace VirtoCommerce.AssetsModule.Tests.Provider
         }
 
         [Fact]
-        public void IsExtensionBlacklisted_BlacklistedAndWhitelisted_ReturnTrue()
+        public void IsExtensionBlacklisted_BlacklistedAndWhitelisted_ReturnFalse()
         {
             // Arrange
             SetupAllowedValues(Security.FileExtensionsBlackList, ".mp3");
@@ -95,7 +95,7 @@ namespace VirtoCommerce.AssetsModule.Tests.Provider
             var result = service.IsExtensionBlacklisted(".mp3");
 
             // Assert
-            result.Should().BeTrue();
+            result.Should().BeFalse();
         }
 
         [Fact]
