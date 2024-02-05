@@ -50,6 +50,7 @@ namespace VirtoCommerce.AssetsModule.Web
             serviceCollection.AddSingleton<Func<IAssetsRepository>>(provider => () => provider.CreateScope().ServiceProvider.GetRequiredService<IAssetsRepository>());
             serviceCollection.AddTransient<IAssetEntryService, AssetEntryService>();
             serviceCollection.AddTransient<IAssetEntrySearchService, AssetEntrySearchService>();
+            serviceCollection.AddSingleton<IFileExtensionService, FileExtensionService>();
         }
 
         public void PostInitialize(IApplicationBuilder appBuilder)

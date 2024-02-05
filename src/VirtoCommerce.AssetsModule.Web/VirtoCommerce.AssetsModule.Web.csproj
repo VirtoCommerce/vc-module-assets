@@ -18,10 +18,9 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="6.5.0" />
-    <PackageReference Include="Microsoft.Extensions.DependencyModel" Version="8.0.0" />
-    <PackageReference Include="VirtoCommerce.Platform.Hangfire" Version="3.800.0" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\VirtoCommerce.AssetsModule.Core\VirtoCommerce.AssetsModule.Core.csproj" />
     <ProjectReference Include="..\VirtoCommerce.AssetsModule.Data.MySql\VirtoCommerce.AssetsModule.Data.MySql.csproj" />
     <ProjectReference Include="..\VirtoCommerce.AssetsModule.Data.PostgreSql\VirtoCommerce.AssetsModule.Data.PostgreSql.csproj" />
     <ProjectReference Include="..\VirtoCommerce.AssetsModule.Data.SqlServer\VirtoCommerce.AssetsModule.Data.SqlServer.csproj" />
