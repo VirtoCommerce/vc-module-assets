@@ -1,18 +1,20 @@
 using System.IO;
 using VirtoCommerce.AssetsModule.Core.Events;
+using VirtoCommerce.AssetsModule.Core.Model;
 using VirtoCommerce.Platform.Core.Common;
 using VirtoCommerce.Platform.Core.Events;
 
 namespace VirtoCommerce.AssetsModule.Core.Services
 {
-    public class AssetUploadStream : Stream
+    public class BlobUploadStream : Stream
     {
         private readonly Stream _innerStream;
         private readonly string _assetProvider;
         private readonly string _blobUrl;
         private readonly IEventPublisher _eventPublisher;
 
-        public AssetUploadStream(string assetProvider, string blobUrl, IEventPublisher eventPublisher, Stream innerStream)
+        public BlobUploadStream(string assetProvider, string blobUrl,
+            IEventPublisher eventPublisher, Stream innerStream)
         {
             _assetProvider = assetProvider;
             _blobUrl = blobUrl;
@@ -59,18 +61,25 @@ namespace VirtoCommerce.AssetsModule.Core.Services
         {
             base.Dispose(disposing);
 
-            if (_eventPublisher != null)
+            if (disposing)
             {
-                var eventData = new AssetsUploadInfo
-                {
-                    Id = _blobUrl,
-                    Uri = _blobUrl,
-                    Provider = _assetProvider
-                };
+                _innerStream.Dispose();
 
-                _eventPublisher.Publish(new AssetUploadEvent([
-                    new GenericChangedEntry<AssetsUploadInfo>(eventData, EntryState.Added)])).GetAwaiter().GetResult();
+                if (_eventPublisher != null)
+                {
+                    var eventData = new BlobEventInfo
+                    {
+                        Id = _blobUrl,
+                        Uri = _blobUrl,
+                        Provider = _assetProvider
+                    };
+
+                    _eventPublisher.Publish(new BlobCreatedEvent([
+                        new GenericChangedEntry<BlobEventInfo>(eventData, EntryState.Added)])).GetAwaiter().GetResult();
+                }
+
             }
+
         }
     }
 }
