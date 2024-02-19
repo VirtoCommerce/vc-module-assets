@@ -65,21 +65,26 @@ namespace VirtoCommerce.AssetsModule.Core.Services
             {
                 _innerStream.Dispose();
 
-                if (_eventPublisher != null)
-                {
-                    var eventData = new BlobEventInfo
-                    {
-                        Id = _blobUrl,
-                        Uri = _blobUrl,
-                        Provider = _assetProvider
-                    };
-
-                    _eventPublisher.Publish(new BlobCreatedEvent([
-                        new GenericChangedEntry<BlobEventInfo>(eventData, EntryState.Added)])).GetAwaiter().GetResult();
-                }
+                RaiseBlobCreatedEvent();
 
             }
 
+        }
+
+        protected virtual void RaiseBlobCreatedEvent()
+        {
+            if (_eventPublisher != null)
+            {
+                var eventData = new BlobEventInfo
+                {
+                    Id = _blobUrl,
+                    Uri = _blobUrl,
+                    Provider = _assetProvider
+                };
+
+                _eventPublisher.Publish(new BlobCreatedEvent([
+                    new GenericChangedEntry<BlobEventInfo>(eventData, EntryState.Added)])).GetAwaiter().GetResult();
+            }
         }
     }
 }
