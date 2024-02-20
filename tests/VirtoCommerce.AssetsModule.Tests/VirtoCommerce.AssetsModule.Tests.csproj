@@ -19,9 +19,6 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Validators\" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\..\src\VirtoCommerce.AssetsModule.Data\VirtoCommerce.AssetsModule.Data.csproj" />
     <ProjectReference Include="..\..\src\VirtoCommerce.AssetsModule.Web\VirtoCommerce.AssetsModule.Web.csproj" />
   </ItemGroup>
