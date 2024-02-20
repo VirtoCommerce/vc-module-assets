@@ -54,7 +54,7 @@ namespace VirtoCommerce.AssetsModule.Web.Controllers
         public async Task<ActionResult<BlobInfo[]>> UploadAssetToLocalFileSystemAsync()
         {
             // Now supports downloading one file, find a solution for downloading multiple files
-            // https://docs.microsoft.com/en-us/aspnet/core/mvc/models/file-uploads?view=aspnetcore-3.1
+            // https://learn.microsoft.com/en-us/aspnet/core/mvc/models/file-uploads?view=aspnetcore-8.0
             var result = new List<BlobInfo>();
 
             if (!MultipartRequestHelper.IsMultipartContentType(Request.ContentType))
@@ -119,7 +119,7 @@ namespace VirtoCommerce.AssetsModule.Web.Controllers
         [UploadFile]
         public async Task<ActionResult<BlobInfo[]>> UploadAssetAsync([FromQuery] string folderUrl, [FromQuery] string url = null, [FromQuery] string name = null)
         {
-            // https://docs.microsoft.com/en-us/aspnet/core/mvc/models/file-uploads?view=aspnetcore-3.1
+            // https://learn.microsoft.com/en-us/aspnet/core/mvc/models/file-uploads?view=aspnetcore-8.0
             if (url == null && !MultipartRequestHelper.IsMultipartContentType(Request.ContentType))
             {
                 return BadRequest($"Expected a multipart request, but got {Request.ContentType}");

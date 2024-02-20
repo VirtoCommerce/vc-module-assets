@@ -1,4 +1,5 @@
 using System.IO;
+using System.Threading.Tasks;
 using VirtoCommerce.AssetsModule.Core.Events;
 using VirtoCommerce.AssetsModule.Core.Model;
 using VirtoCommerce.Platform.Core.Common;
@@ -13,8 +14,7 @@ namespace VirtoCommerce.AssetsModule.Core.Services
         private readonly string _blobUrl;
         private readonly IEventPublisher _eventPublisher;
 
-        public BlobUploadStream(string assetProvider, string blobUrl,
-            IEventPublisher eventPublisher, Stream innerStream)
+        public BlobUploadStream(string assetProvider, string blobUrl, IEventPublisher eventPublisher, Stream innerStream)
         {
             _assetProvider = assetProvider;
             _blobUrl = blobUrl;
@@ -30,7 +30,11 @@ namespace VirtoCommerce.AssetsModule.Core.Services
 
         public override long Length => _innerStream.Length;
 
-        public override long Position { get => _innerStream.Position; set => _innerStream.Position = value; }
+        public override long Position
+        {
+            get => _innerStream.Position;
+            set => _innerStream.Position = value;
+        }
 
         public override void Flush()
         {
@@ -65,13 +69,11 @@ namespace VirtoCommerce.AssetsModule.Core.Services
             {
                 _innerStream.Dispose();
 
-                RaiseBlobCreatedEvent();
-
+                RaiseBlobCreatedEvent().GetAwaiter().GetResult();
             }
-
         }
 
-        protected virtual void RaiseBlobCreatedEvent()
+        protected virtual Task RaiseBlobCreatedEvent()
         {
             if (_eventPublisher != null)
             {
@@ -79,12 +81,13 @@ namespace VirtoCommerce.AssetsModule.Core.Services
                 {
                     Id = _blobUrl,
                     Uri = _blobUrl,
-                    Provider = _assetProvider
+                    Provider = _assetProvider,
                 };
 
-                _eventPublisher.Publish(new BlobCreatedEvent([
-                    new GenericChangedEntry<BlobEventInfo>(eventData, EntryState.Added)])).GetAwaiter().GetResult();
+                return _eventPublisher.Publish(new BlobCreatedEvent([new GenericChangedEntry<BlobEventInfo>(eventData, EntryState.Added)]));
             }
+
+            return Task.CompletedTask;
         }
     }
 }
