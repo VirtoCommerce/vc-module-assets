@@ -9,16 +9,16 @@ namespace VirtoCommerce.AssetsModule.Core.Services;
 public class BlobUploadStream : Stream
 {
     private readonly Stream _innerStream;
-    private readonly string _assetProvider;
     private readonly string _blobUrl;
+    private readonly string _providerName;
     private readonly IEventPublisher _eventPublisher;
 
-    public BlobUploadStream(string assetProvider, string blobUrl, IEventPublisher eventPublisher, Stream innerStream)
+    public BlobUploadStream(Stream innerStream, string blobUrl, string providerName, IEventPublisher eventPublisher)
     {
-        _assetProvider = assetProvider;
-        _blobUrl = blobUrl;
-        _eventPublisher = eventPublisher;
         _innerStream = innerStream;
+        _blobUrl = blobUrl;
+        _providerName = providerName;
+        _eventPublisher = eventPublisher;
     }
 
     public override bool CanRead => _innerStream.CanRead;
@@ -83,7 +83,7 @@ public class BlobUploadStream : Stream
         {
             Id = _blobUrl,
             Uri = _blobUrl,
-            Provider = _assetProvider,
+            Provider = _providerName,
         };
 
         return _eventPublisher.Publish(new BlobCreatedEvent(eventData));
