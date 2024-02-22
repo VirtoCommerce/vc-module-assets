@@ -6,7 +6,7 @@ namespace VirtoCommerce.AssetsModule.Web.Helpers
 {
     /// <summary>
     /// This attribute is used to disable model binding for the upload action
-    /// More information https://docs.microsoft.com/en-us/aspnet/core/mvc/models/file-uploads?view=aspnetcore-3.1
+    /// More information https://learn.microsoft.com/en-us/aspnet/core/mvc/models/file-uploads?view=aspnetcore-8.0
     /// </summary>
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
     public class DisableFormValueModelBindingAttribute : Attribute, IResourceFilter
