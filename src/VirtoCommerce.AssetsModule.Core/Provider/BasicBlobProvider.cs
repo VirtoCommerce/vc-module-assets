@@ -1,5 +1,4 @@
 using System;
-using System.IO;
 using Microsoft.Extensions.Options;
 using VirtoCommerce.AssetsModule.Core.Services;
 using VirtoCommerce.Platform.Core;
@@ -19,8 +18,7 @@ namespace VirtoCommerce.AssetsModule.Core.Assets
 
         public virtual bool IsExtensionBlacklisted(string path)
         {
-            var extension = Path.GetExtension(path);
-            var allowed = _fileExtensionService.IsExtensionAllowedAsync(extension).GetAwaiter().GetResult();
+            var allowed = _fileExtensionService.IsExtensionAllowedAsync(path).GetAwaiter().GetResult();
             return !allowed;
         }
     }
