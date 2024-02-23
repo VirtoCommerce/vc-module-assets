@@ -20,7 +20,7 @@ angular.module('virtoCommerce.assetsModule')
                         _.each(data.results, function (x) {
                             x.isImage = x.contentType && x.contentType.startsWith('image/');
                             if (x.isImage) {
-                                x.noCacheUrl = `${x.url}?t=${x.modifiedDate}`;
+                                x.noCacheUrl = `${x.url}${x.url?.contains('?') ? '&' : '?'}t=${x.modifiedDate}`;
                             }
                         });
                         $scope.listEntries = data.results;
