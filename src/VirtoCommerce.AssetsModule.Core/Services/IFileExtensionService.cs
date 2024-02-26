@@ -7,5 +7,5 @@ public interface IFileExtensionService
 {
     Task<IList<string>> GetWhiteListAsync();
     Task<IList<string>> GetBlackListAsync();
-    Task<bool> IsExtensionAllowedAsync(string extension);
+    Task<bool> IsExtensionAllowedAsync(string path);
 }

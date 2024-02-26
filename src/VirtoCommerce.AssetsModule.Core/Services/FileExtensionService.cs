@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Options;
@@ -23,9 +24,11 @@ public class FileExtensionService : IFileExtensionService
         _settingsManager = settingsManager;
     }
 
-    public virtual async Task<bool> IsExtensionAllowedAsync(string extension)
+    public virtual async Task<bool> IsExtensionAllowedAsync(string path)
     {
+        var extension = Path.GetExtension(path);
         var whiteList = await GetWhiteListAsync();
+
         if (whiteList.Count != 0)
         {
             return whiteList.Contains(extension, _ignoreCase);
