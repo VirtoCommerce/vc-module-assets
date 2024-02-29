@@ -175,6 +175,10 @@ namespace VirtoCommerce.AssetsModule.Web.Controllers
                     }
                 }
             }
+            catch (HttpRequestException ex)
+            {
+                return new ObjectResult(new { ex.Message }) { StatusCode = (int)ex.StatusCode };
+            }
             catch (PlatformException exc)
             {
                 return new ObjectResult(new { exc.Message }) { StatusCode = StatusCodes.Status405MethodNotAllowed };
