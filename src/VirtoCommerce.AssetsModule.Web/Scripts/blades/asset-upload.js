@@ -6,6 +6,10 @@ angular.module('virtoCommerce.assetsModule')
             blade.fileUploadOptions = {};
         }
         var folderUrl = blade.currentEntityId || "";
+        if (folderUrl.contains('?')) {
+            // Remove query string
+            folderUrl = folderUrl.substring(0, folderUrl.indexOf('?'));
+        }
 
         function initialize() {
             if (!$scope.uploader) {
@@ -50,7 +54,7 @@ angular.module('virtoCommerce.assetsModule')
                             }, function (error) {
                                 bladeNavigationService.setError('Error ' + error.status, blade);
                             });
-                        
+
                     } else {
                         dialogService.showNotificationDialog({
                             id: "error",
@@ -99,7 +103,7 @@ angular.module('virtoCommerce.assetsModule')
         $scope.addImageFromUrl = function () {
             if (blade.newExternalImageUrl) {
                 blade.uploadCompleted = false;
-                if (folderUrl) {                    
+                if (folderUrl) {
                     assets.uploadFromUrl({ folderUrl: folderUrl, url: blade.newExternalImageUrl }, function (data) {
                         refreshParentBlade();
                         if (blade.onUploadComplete) {
