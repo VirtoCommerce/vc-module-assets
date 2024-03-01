@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -131,10 +132,10 @@ namespace VirtoCommerce.AssetsModule.Web.Controllers
                 if (url != null)
                 {
                     var fileName = name ?? HttpUtility.UrlDecode(Path.GetFileName(url));
-                    var fileUrl = UrlHelpers.Combine(folderUrl ?? "", fileName);
+                    var fileUrl = UrlHelpers.Combine(folderUrl ?? "", Uri.EscapeDataString(fileName));
                     using (var client = _httpClientFactory.CreateClient())
-                    using (var blobStream = await _blobProvider.OpenWriteAsync(fileUrl))
                     using (var remoteStream = await client.GetStreamAsync(url))
+                    using (var blobStream = await _blobProvider.OpenWriteAsync(fileUrl))
                     {
                         await remoteStream.CopyToAsync(blobStream);
                         var blobInfo = AbstractTypeFactory<BlobInfo>.TryCreateInstance();
@@ -157,7 +158,7 @@ namespace VirtoCommerce.AssetsModule.Web.Controllers
                         if (hasContentDispositionHeader && MultipartRequestHelper.HasFileContentDisposition(contentDisposition))
                         {
                             var fileName = contentDisposition.FileName.Value;
-                            var targetFilePath = UrlHelpers.Combine(folderUrl ?? "", fileName);
+                            var targetFilePath = UrlHelpers.Combine(folderUrl ?? "", Uri.EscapeDataString(fileName));
 
                             using (var targetStream = await _blobProvider.OpenWriteAsync(targetFilePath))
                             {
@@ -173,6 +174,10 @@ namespace VirtoCommerce.AssetsModule.Web.Controllers
                         }
                     }
                 }
+            }
+            catch (HttpRequestException ex)
+            {
+                return new ObjectResult(new { ex.Message }) { StatusCode = (int)ex.StatusCode };
             }
             catch (PlatformException exc)
             {
