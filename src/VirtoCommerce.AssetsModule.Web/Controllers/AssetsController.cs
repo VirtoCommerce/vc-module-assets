@@ -159,6 +159,7 @@ namespace VirtoCommerce.AssetsModule.Web.Controllers
                         {
                             var fileName = contentDisposition.FileName.Value;
                             var targetFilePath = UrlHelpers.Combine(folderUrl ?? "", Uri.EscapeDataString(fileName));
+                            var rawTargetFilePath = UrlHelpers.Combine(folderUrl ?? "", fileName);
 
                             using (var targetStream = await _blobProvider.OpenWriteAsync(targetFilePath))
                             {
@@ -168,7 +169,7 @@ namespace VirtoCommerce.AssetsModule.Web.Controllers
                             var blobInfo = AbstractTypeFactory<BlobInfo>.TryCreateInstance();
                             blobInfo.Name = fileName;
                             blobInfo.RelativeUrl = targetFilePath;
-                            blobInfo.Url = _urlResolver.GetAbsoluteUrl(targetFilePath);
+                            blobInfo.Url = _urlResolver.GetAbsoluteUrl(rawTargetFilePath);
                             blobInfo.ContentType = MimeTypeResolver.ResolveContentType(fileName);
                             result.Add(blobInfo);
                         }
