@@ -86,7 +86,7 @@ namespace VirtoCommerce.AssetsModule.Web.Controllers
                         Directory.CreateDirectory(uploadPath);
                     }
 
-                    using (var targetStream = System.IO.File.Create(targetFilePath))
+                    await using (var targetStream = System.IO.File.Create(targetFilePath))
                     {
                         await section.Body.CopyToAsync(targetStream);
                     }
@@ -133,17 +133,16 @@ namespace VirtoCommerce.AssetsModule.Web.Controllers
                 {
                     var fileName = name ?? HttpUtility.UrlDecode(Path.GetFileName(url));
                     var fileUrl = UrlHelpers.Combine(folderUrl ?? "", Uri.EscapeDataString(fileName));
-                    using (var client = _httpClientFactory.CreateClient())
-                    using (var remoteStream = await client.GetStreamAsync(url))
-                    using (var blobStream = await _blobProvider.OpenWriteAsync(fileUrl))
-                    {
-                        await remoteStream.CopyToAsync(blobStream);
-                        var blobInfo = AbstractTypeFactory<BlobInfo>.TryCreateInstance();
-                        blobInfo.Name = fileName;
-                        blobInfo.RelativeUrl = fileUrl;
-                        blobInfo.Url = _urlResolver.GetAbsoluteUrl(fileUrl);
-                        result.Add(blobInfo);
-                    }
+                    using var client = _httpClientFactory.CreateClient();
+                    await using var remoteStream = await client.GetStreamAsync(url);
+                    await using var blobStream = await _blobProvider.OpenWriteAsync(fileUrl);
+
+                    await remoteStream.CopyToAsync(blobStream);
+                    var blobInfo = AbstractTypeFactory<BlobInfo>.TryCreateInstance();
+                    blobInfo.Name = fileName;
+                    blobInfo.RelativeUrl = fileUrl;
+                    blobInfo.Url = _urlResolver.GetAbsoluteUrl(fileUrl);
+                    result.Add(blobInfo);
                 }
                 else
                 {
@@ -161,7 +160,7 @@ namespace VirtoCommerce.AssetsModule.Web.Controllers
                             var targetFilePath = UrlHelpers.Combine(folderUrl ?? "", Uri.EscapeDataString(fileName));
                             var rawTargetFilePath = UrlHelpers.Combine(folderUrl ?? "", fileName);
 
-                            using (var targetStream = await _blobProvider.OpenWriteAsync(targetFilePath))
+                            await using (var targetStream = await _blobProvider.OpenWriteAsync(targetFilePath))
                             {
                                 await section.Body.CopyToAsync(targetStream);
                             }
