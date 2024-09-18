@@ -133,7 +133,7 @@ namespace VirtoCommerce.AssetsModule.Web.Controllers
                 {
                     var fileName = name ?? HttpUtility.UrlDecode(Path.GetFileName(url));
                     var fileUrl = UrlHelpers.Combine(folderUrl ?? "", Uri.EscapeDataString(fileName));
-                    using var client = _httpClientFactory.CreateClient();
+                    var client = _httpClientFactory.CreateClient();
                     await using var remoteStream = await client.GetStreamAsync(url);
                     await using var blobStream = await _blobProvider.OpenWriteAsync(fileUrl);
 
