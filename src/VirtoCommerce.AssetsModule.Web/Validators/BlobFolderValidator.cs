@@ -4,7 +4,7 @@ using VirtoCommerce.AssetsModule.Core.Assets;
 
 namespace VirtoCommerce.AssetsModule.Web.Validators
 {
-    public class BlobFolderValidator : AbstractValidator<BlobFolder>
+    public partial class BlobFolderValidator : AbstractValidator<BlobFolder>
     {
         public BlobFolderValidator()
         {
@@ -15,17 +15,20 @@ namespace VirtoCommerce.AssetsModule.Web.Validators
                 .NotEmpty()
                 .WithMessage("Folder name must not be empty.")
                 .MinimumLength(3)
-                .WithMessage(x => $"Minimum length is 3. You entered {x.Name.Length}")
+                .WithMessage(x => $"Folder name must be at least 3 characters long. You entered {x.Name.Length} characters.")
                 .MaximumLength(63)
-                .WithMessage(x => $"Maximum length is 63. You entered {x.Name.Length}")
-                .Must(x => !x.StartsWith("-"))
-                .WithMessage("Folder name must not starts with dash symbol.")
-                .Must(x => !x.EndsWith("-"))
-                .WithMessage("Folder name must not ends with dash symbol.")
+                .WithMessage(x => $"Folder name must be at most 63 characters long. You entered {x.Name.Length} characters.")
+                .Must(x => !x.StartsWith('-'))
+                .WithMessage("Folder name must not start with a dash symbol.")
+                .Must(x => !x.EndsWith('-'))
+                .WithMessage("Folder name must not end with a dash symbol.")
                 .Must(x => !x.Contains("--"))
                 .WithMessage("Folder name must not contain consecutive dash symbols.")
-                .Must(x => !new Regex("[^0-9a-z -]").IsMatch(x))
-                .WithMessage("Folder name must not contain special symbols.");
+                .Must(x => !FolderNameRegex().IsMatch(x))
+                .WithMessage("Folder name must only contain lowercase letters, numbers, spaces, and single dashes.");
         }
+
+        [GeneratedRegex("[^0-9a-z -]")]
+        private static partial Regex FolderNameRegex();
     }
 }
