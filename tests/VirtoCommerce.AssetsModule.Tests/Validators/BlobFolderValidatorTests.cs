@@ -135,7 +135,7 @@ namespace VirtoCommerce.AssetsModule.Tests.Validators
 
             // Assert
             result.IsValid.Should().BeFalse();
-            result.Errors.Should().ContainSingle(x => x.PropertyName == "Name" && x.ErrorMessage.Contains("special symbols"));
+            result.Errors.Should().ContainSingle(x => x.PropertyName == "Name" && x.ErrorMessage.Contains("must only contain"));
         }
 
         [Fact]
