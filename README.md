@@ -37,7 +37,7 @@ You can upload the file using one of the following ways:
 1. Browse the file
 1. Enter an external URL for the file
 
-***Note:*** *You cannot upload your file intro the root.*
+***Note:*** *You cannot upload your file into the root.*
 
 ## Asset Modules
 
@@ -68,14 +68,14 @@ To switch between the implementations, follow these steps:
     - Provide **ConnectionString** in case you are going to use the **AzureBlobStorage** implementation option
 
 ## Documentation
-* [Assets Module Documentation](https://virtocommerce.com/docs/latest/modules/assets/)
+* [Assets Module Documentation](https://docs.virtocommerce.org/platform/user-guide/assets/overview/)
 * [View on GitHub](docs/index.md)
 
 
 ## References
 
-* Deploy: https://virtocommerce.com/docs/latest/developer-guide/deploy-module-from-source-code/
-* Installation: https://www.virtocommerce.com/docs/latest/user-guide/modules/
+* Deploy: https://docs.virtocommerce.org/platform/developer-guide/Tutorials-and-How-tos/Tutorials/deploy-module-from-source-code/
+* Installation: https://docs.virtocommerce.org/platform/user-guide/modules-installation/
 * Home: https://virtocommerce.com
 * Community: https://www.virtocommerce.org
 * [Download Latest Release](https://github.com/VirtoCommerce/vc-module-assets/releases/latest)
