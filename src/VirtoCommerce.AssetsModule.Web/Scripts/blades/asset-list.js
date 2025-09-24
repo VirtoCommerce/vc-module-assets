@@ -1,7 +1,7 @@
 angular.module('virtoCommerce.assetsModule')
-    .controller('virtoCommerce.assetsModule.assetListController', ['$scope', '$translate', 'platformWebApp.assets.api',
+    .controller('virtoCommerce.assetsModule.assetListController', ['$scope', '$translate', '$timeout', 'platformWebApp.assets.api',
         'platformWebApp.bladeNavigationService', 'platformWebApp.dialogService', 'platformWebApp.bladeUtils', 'platformWebApp.uiGridHelper',
-        function ($scope, $translate, assets, bladeNavigationService, dialogService, bladeUtils, uiGridHelper) {
+        function ($scope, $translate, $timeout, assets, bladeNavigationService, dialogService, bladeUtils, uiGridHelper) {
             var blade = $scope.blade;
             blade.title = 'platform.blades.asset-list.title';
             if (!blade.currentEntity) {
@@ -82,20 +82,22 @@ angular.module('virtoCommerce.assetsModule')
             };
 
             $scope.downloadUrl = function (data) {
-                try {
-                    var link = document.createElement('a');
-                    link.href = data.url;
-                    link.download = data.name || 'download'; 
-                    document.body.appendChild(link);
+                $timeout(function () {
+                    try {
+                        var link = document.createElement('a');
+                        link.href = data.url;
+                        link.download = data.name || 'download';
+                        document.body.appendChild(link);
 
-                    link.click();
+                        link.click();
 
-                    document.body.removeChild(link);
-                } catch (err) {
-                    console.warn('Download fallback: opening in new tab due to browser restriction', err);
-                    // Fallback: open in new tab
-                    window.open(data.url, '_blank');
-                }
+                        document.body.removeChild(link);
+                    } catch (err) {
+                        console.warn('Download fallback: opening in new tab due to browser restriction', err);
+                        // Fallback: open in new tab
+                        window.open(data.url, '_blank');
+                    }
+                }, 0);
             };
 
             function isItemsChecked() {
