@@ -85,14 +85,14 @@ angular.module('virtoCommerce.assetsModule')
                 try {
                     var link = document.createElement('a');
                     link.href = data.url;
-                    link.download = data.name || 'file.txt'; 
+                    link.download = data.name || 'download'; 
                     document.body.appendChild(link);
 
                     link.click();
 
                     document.body.removeChild(link);
                 } catch (err) {
-                    console.warn('Download fallback: opening in new tab due browser restriction', err);
+                    console.warn('Download fallback: opening in new tab due to browser restriction', err);
                     // Fallback: open in new tab
                     window.open(data.url, '_blank');
                 }
