@@ -1,6 +1,8 @@
+using System.Threading.Tasks;
 using FluentAssertions;
 using Microsoft.Extensions.Options;
 using Moq;
+using VirtoCommerce.AssetsModule.Core.Services;
 using VirtoCommerce.Platform.Core;
 using VirtoCommerce.Platform.Core.Settings;
 using Xunit;
@@ -19,113 +21,112 @@ namespace VirtoCommerce.AssetsModule.Tests.Provider
             _platformOptionsMock = new Mock<IOptions<PlatformOptions>>();
             _settingsManagerMock = new Mock<ISettingsManager>();
             _platformOptions = new PlatformOptions { FileExtensionsBlackList = new string[0] };
-            _platformOptions = new PlatformOptions { FileExtensionsWhiteList = new string[0] };
             _platformOptionsMock.SetupGet(x => x.Value).Returns(_platformOptions);
         }
 
         [Fact]
-        public void IsExtensionBlacklisted_Blacklisted_ReturnTrue()
+        public async Task IsExtensionBlacklisted_Blacklisted_ReturnTrue()
         {
             // Arrange
             SetupAllowedValues(Security.FileExtensionsBlackList, ".pdf");
             SetupAllowedValues(Security.FileExtensionsWhiteList);
-            var service = new BasicBlobProviderMock(_platformOptionsMock.Object, _settingsManagerMock.Object);
+            var service = new FileExtensionService(_platformOptionsMock.Object, _settingsManagerMock.Object);
 
             // Act
-            var result = service.IsExtensionBlacklisted(".pdf");
-
-            // Assert
-            result.Should().BeTrue();
-        }
-
-        [Fact]
-        public void IsExtensionBlacklisted_NotWhitelisted_ReturnTrue()
-        {
-            // Arrange
-            SetupAllowedValues(Security.FileExtensionsBlackList);
-            SetupAllowedValues(Security.FileExtensionsWhiteList, ".txt");
-            var service = new BasicBlobProviderMock(_platformOptionsMock.Object, _settingsManagerMock.Object);
-
-            // Act
-            var result = service.IsExtensionBlacklisted(".pdf");
-
-            // Assert
-            result.Should().BeTrue();
-        }
-
-        [Fact]
-        public void IsExtensionBlacklisted_Whitelisted_ReturnFalse()
-        {
-            // Arrange
-            SetupAllowedValues(Security.FileExtensionsBlackList);
-            SetupAllowedValues(Security.FileExtensionsWhiteList, ".txt");
-            var service = new BasicBlobProviderMock(_platformOptionsMock.Object, _settingsManagerMock.Object);
-
-            // Act
-            var result = service.IsExtensionBlacklisted(".txt");
+            var result = await service.IsExtensionAllowedAsync(".pdf");
 
             // Assert
             result.Should().BeFalse();
         }
 
         [Fact]
-        public void IsExtensionBlacklisted_ListsIsEmpty_ReturnFalse()
+        public async Task IsExtensionBlacklisted_NotWhitelisted_ReturnTrue()
+        {
+            // Arrange
+            SetupAllowedValues(Security.FileExtensionsBlackList);
+            SetupAllowedValues(Security.FileExtensionsWhiteList, ".txt");
+            var service = new FileExtensionService(_platformOptionsMock.Object, _settingsManagerMock.Object);
+
+            // Act
+            var result = await service.IsExtensionAllowedAsync(".pdf");
+
+            // Assert
+            result.Should().BeFalse();
+        }
+
+        [Fact]
+        public async Task IsExtensionBlacklisted_Whitelisted_ReturnFalse()
+        {
+            // Arrange
+            SetupAllowedValues(Security.FileExtensionsBlackList);
+            SetupAllowedValues(Security.FileExtensionsWhiteList, ".txt");
+            var service = new FileExtensionService(_platformOptionsMock.Object, _settingsManagerMock.Object);
+
+            // Act
+            var result = await service.IsExtensionAllowedAsync(".txt");
+
+            // Assert
+            result.Should().BeTrue();
+        }
+
+        [Fact]
+        public async Task IsExtensionBlacklisted_ListsIsEmpty_ReturnFalse()
         {
             // Arrange
             SetupAllowedValues(Security.FileExtensionsBlackList);
             SetupAllowedValues(Security.FileExtensionsWhiteList);
-            var service = new BasicBlobProviderMock(_platformOptionsMock.Object, _settingsManagerMock.Object);
+            var service = new FileExtensionService(_platformOptionsMock.Object, _settingsManagerMock.Object);
 
             // Act
-            var result = service.IsExtensionBlacklisted(".png");
+            var result = await service.IsExtensionAllowedAsync(".png");
 
             // Assert
-            result.Should().BeFalse();
+            result.Should().BeTrue();
         }
 
         [Fact]
-        public void IsExtensionBlacklisted_BlacklistedAndWhitelisted_ReturnFalse()
+        public async Task IsExtensionBlacklisted_BlacklistedAndWhitelisted_ReturnFalse()
         {
             // Arrange
             SetupAllowedValues(Security.FileExtensionsBlackList, ".mp3");
             SetupAllowedValues(Security.FileExtensionsWhiteList, ".mp3");
-            var service = new BasicBlobProviderMock(_platformOptionsMock.Object, _settingsManagerMock.Object);
+            var service = new FileExtensionService(_platformOptionsMock.Object, _settingsManagerMock.Object);
 
             // Act
-            var result = service.IsExtensionBlacklisted(".mp3");
-
-            // Assert
-            result.Should().BeFalse();
-        }
-
-        [Fact]
-        public void IsExtensionBlacklisted_NotBlacklistedAndWhitelisted_ReturnTrue()
-        {
-            // Arrange
-            SetupAllowedValues(Security.FileExtensionsBlackList, ".mp3");
-            SetupAllowedValues(Security.FileExtensionsWhiteList, ".txt");
-            var service = new BasicBlobProviderMock(_platformOptionsMock.Object, _settingsManagerMock.Object);
-
-            // Act
-            var result = service.IsExtensionBlacklisted(".pdf");
+            var result = await service.IsExtensionAllowedAsync(".mp3");
 
             // Assert
             result.Should().BeTrue();
         }
 
         [Fact]
-        public void IsExtensionBlacklisted_NotBlacklistedAndWhiteListEmpty_ReturnFalse()
+        public async Task IsExtensionBlacklisted_NotBlacklistedAndWhitelisted_ReturnTrue()
+        {
+            // Arrange
+            SetupAllowedValues(Security.FileExtensionsBlackList, ".mp3");
+            SetupAllowedValues(Security.FileExtensionsWhiteList, ".txt");
+            var service = new FileExtensionService(_platformOptionsMock.Object, _settingsManagerMock.Object);
+
+            // Act
+            var result = await service.IsExtensionAllowedAsync(".pdf");
+
+            // Assert
+            result.Should().BeFalse();
+        }
+
+        [Fact]
+        public async Task IsExtensionBlacklisted_NotBlacklistedAndWhiteListEmpty_ReturnFalse()
         {
             // Arrange
             SetupAllowedValues(Security.FileExtensionsBlackList, ".mp3");
             SetupAllowedValues(Security.FileExtensionsWhiteList);
-            var service = new BasicBlobProviderMock(_platformOptionsMock.Object, _settingsManagerMock.Object);
+            var service = new FileExtensionService(_platformOptionsMock.Object, _settingsManagerMock.Object);
 
             // Act
-            var result = service.IsExtensionBlacklisted(".pdf");
+            var result = await service.IsExtensionAllowedAsync(".pdf");
 
             // Assert
-            result.Should().BeFalse();
+            result.Should().BeTrue();
         }
 
         private void SetupAllowedValues(SettingDescriptor extensionList, params string[] values)
