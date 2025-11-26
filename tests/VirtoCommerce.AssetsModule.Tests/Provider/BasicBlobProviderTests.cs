@@ -21,7 +21,6 @@ namespace VirtoCommerce.AssetsModule.Tests.Provider
             _platformOptionsMock = new Mock<IOptions<PlatformOptions>>();
             _settingsManagerMock = new Mock<ISettingsManager>();
             _platformOptions = new PlatformOptions { FileExtensionsBlackList = new string[0] };
-            _platformOptions = new PlatformOptions { FileExtensionsWhiteList = new string[0] };
             _platformOptionsMock.SetupGet(x => x.Value).Returns(_platformOptions);
         }
 
