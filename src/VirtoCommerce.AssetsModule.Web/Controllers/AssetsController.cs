@@ -9,17 +9,13 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Options;
-using Microsoft.Net.Http.Headers;
 using VirtoCommerce.AssetsModule.Core.Assets;
-using VirtoCommerce.AssetsModule.Core.Swagger;
 using VirtoCommerce.AssetsModule.Web.Helpers;
 using VirtoCommerce.AssetsModule.Web.Validators;
 using VirtoCommerce.Platform.Core;
 using VirtoCommerce.Platform.Core.Common;
 using VirtoCommerce.Platform.Core.Exceptions;
-using VirtoCommerce.Platform.Data.Helpers;
 
 using UrlHelpers = VirtoCommerce.Platform.Core.Extensions.UrlHelperExtensions;
 
@@ -52,55 +48,66 @@ namespace VirtoCommerce.AssetsModule.Web.Controllers
         [DisableFormValueModelBinding]
         [DisableRequestSizeLimit]
         [Authorize(PlatformConstants.Security.Permissions.AssetCreate)]
-        public async Task<ActionResult<BlobInfo[]>> UploadAssetToLocalFileSystemAsync()
+        public async Task<ActionResult<BlobInfo[]>> UploadAssetToLocalFileSystemAsync(IFormFileCollection files)
         {
+            if (files.IsNullOrEmpty() && Request.Form.Files.IsNullOrEmpty())
+            {
+                return BadRequest($"Expected file(s) as multipart content.");
+            }
+
             // Now supports downloading one file, find a solution for downloading multiple files
             // https://learn.microsoft.com/en-us/aspnet/core/mvc/models/file-uploads?view=aspnetcore-8.0
             var result = new List<BlobInfo>();
 
-            if (!MultipartRequestHelper.IsMultipartContentType(Request.ContentType))
-            {
-                return BadRequest($"Expected a multipart request, but got {Request.ContentType}");
-            }
             var uploadPath = Path.GetFullPath(_platformOptions.LocalUploadFolderPath);
             if (!Directory.Exists(uploadPath))
             {
                 Directory.CreateDirectory(uploadPath);
             }
 
-            var boundary = MultipartRequestHelper.GetBoundary(MediaTypeHeaderValue.Parse(Request.ContentType), _defaultFormOptions.MultipartBoundaryLengthLimit);
-            var reader = new MultipartReader(boundary, HttpContext.Request.Body);
-
-            var section = await reader.ReadNextSectionAsync();
-            if (section != null)
+            if (!files.IsNullOrEmpty())
             {
-                var hasContentDispositionHeader = ContentDispositionHeaderValue.TryParse(section.ContentDisposition, out var contentDisposition);
-
-                if (hasContentDispositionHeader && MultipartRequestHelper.HasFileContentDisposition(contentDisposition))
-                {
-                    var fileName = contentDisposition.FileName.Value;
-                    var targetFilePath = Path.Combine(uploadPath, fileName);
-
-                    if (!Directory.Exists(uploadPath))
-                    {
-                        Directory.CreateDirectory(uploadPath);
-                    }
-
-                    await using (var targetStream = System.IO.File.Create(targetFilePath))
-                    {
-                        await section.Body.CopyToAsync(targetStream);
-                    }
-
-                    var blobInfo = AbstractTypeFactory<BlobInfo>.TryCreateInstance();
-                    blobInfo.Name = fileName;
-                    //Use only file name as Url, for further access to these files need use PlatformOptions.LocalUploadFolderPath
-                    blobInfo.Url = fileName;
-                    blobInfo.ContentType = MimeTypeResolver.ResolveContentType(fileName);
-                    result.Add(blobInfo);
-                }
+                var blobInfos = await UploadFilesToLocalFromFileFormCollection(files, uploadPath);
+                result.AddRange(blobInfos);
+            }
+            else if(!Request.Form.Files.IsNullOrEmpty())
+            {
+                var blobInfos = await UploadFilesToLocalFromFileFormCollection(Request.Form.Files, uploadPath);
+                result.AddRange(blobInfos);
             }
 
             return Ok(result.ToArray());
+        }
+
+        private static async Task<List<BlobInfo>> UploadFilesToLocalFromFileFormCollection(IFormFileCollection files, string uploadPath)
+        {
+            var result = new List<BlobInfo>();
+
+            foreach (var file in files)
+            {
+                var fileName = file.FileName;
+                var targetFilePath = Path.Combine(uploadPath, fileName);
+
+                if (!Directory.Exists(uploadPath))
+                {
+                    Directory.CreateDirectory(uploadPath);
+                }
+
+                await using (var targetStream = System.IO.File.Create(targetFilePath))
+                {
+                    await file.CopyToAsync(targetStream);
+                }
+
+                var blobInfo = AbstractTypeFactory<BlobInfo>.TryCreateInstance();
+                blobInfo.Name = fileName;
+                //Use only file name as Url, for further access to these files need use PlatformOptions.LocalUploadFolderPath
+                blobInfo.Url = fileName;
+                blobInfo.ContentType = MimeTypeResolver.ResolveContentType(fileName);
+
+                result.Add(blobInfo);
+            }
+
+            return result;
         }
 
         /// <summary>
@@ -112,18 +119,18 @@ namespace VirtoCommerce.AssetsModule.Web.Controllers
         /// <param name="folderUrl">Parent folder url (relative or absolute).</param>
         /// <param name="url">Url for uploaded remote resource (optional)</param>
         /// <param name="name">File name</param>
+        /// <param name="files">Collection of files to upload (optional)</param>
         /// <returns></returns>
         [HttpPost]
         [Route("")]
         [DisableFormValueModelBinding]
         [Authorize(PlatformConstants.Security.Permissions.AssetCreate)]
-        [UploadFile]
-        public async Task<ActionResult<BlobInfo[]>> UploadAssetAsync([FromQuery] string folderUrl, [FromQuery] string url = null, [FromQuery] string name = null)
+        public async Task<ActionResult<BlobInfo[]>> UploadAssetAsync([FromQuery] string folderUrl, [FromQuery] string url = null, [FromQuery] string name = null, IFormFileCollection files = null)
         {
             // https://learn.microsoft.com/en-us/aspnet/core/mvc/models/file-uploads?view=aspnetcore-8.0
-            if (url == null && !MultipartRequestHelper.IsMultipartContentType(Request.ContentType))
+            if (url == null && files.IsNullOrEmpty() && Request.Form.Files.IsNullOrEmpty())
             {
-                return BadRequest($"Expected a multipart request, but got {Request.ContentType}");
+                return BadRequest($"Expected request with either file url or file(s) as multipart content.");
             }
 
             var result = new List<BlobInfo>();
@@ -131,48 +138,18 @@ namespace VirtoCommerce.AssetsModule.Web.Controllers
             {
                 if (url != null)
                 {
-                    var fileName = name ?? HttpUtility.UrlDecode(Path.GetFileName(url));
-                    var fileUrl = UrlHelpers.Combine(folderUrl ?? "", Uri.EscapeDataString(fileName));
-                    var client = _httpClientFactory.CreateClient();
-                    await using var remoteStream = await client.GetStreamAsync(url);
-                    await using var blobStream = await _blobProvider.OpenWriteAsync(fileUrl);
-
-                    await remoteStream.CopyToAsync(blobStream);
-                    var blobInfo = AbstractTypeFactory<BlobInfo>.TryCreateInstance();
-                    blobInfo.Name = fileName;
-                    blobInfo.RelativeUrl = fileUrl;
-                    blobInfo.Url = _urlResolver.GetAbsoluteUrl(fileUrl);
+                    var blobInfo = await UploadFileFromUrl(folderUrl, url, name);
                     result.Add(blobInfo);
                 }
-                else
+                else if (!files.IsNullOrEmpty())
                 {
-                    var boundary = MultipartRequestHelper.GetBoundary(MediaTypeHeaderValue.Parse(Request.ContentType), _defaultFormOptions.MultipartBoundaryLengthLimit);
-                    var reader = new MultipartReader(boundary, HttpContext.Request.Body);
-
-                    var section = await reader.ReadNextSectionAsync();
-                    if (section != null)
-                    {
-                        var hasContentDispositionHeader = ContentDispositionHeaderValue.TryParse(section.ContentDisposition, out var contentDisposition);
-
-                        if (hasContentDispositionHeader && MultipartRequestHelper.HasFileContentDisposition(contentDisposition))
-                        {
-                            var fileName = contentDisposition.FileName.Value;
-                            var targetFilePath = UrlHelpers.Combine(folderUrl ?? "", Uri.EscapeDataString(fileName));
-                            var rawTargetFilePath = UrlHelpers.Combine(folderUrl ?? "", fileName);
-
-                            await using (var targetStream = await _blobProvider.OpenWriteAsync(targetFilePath))
-                            {
-                                await section.Body.CopyToAsync(targetStream);
-                            }
-
-                            var blobInfo = AbstractTypeFactory<BlobInfo>.TryCreateInstance();
-                            blobInfo.Name = fileName;
-                            blobInfo.RelativeUrl = targetFilePath;
-                            blobInfo.Url = _urlResolver.GetAbsoluteUrl(rawTargetFilePath);
-                            blobInfo.ContentType = MimeTypeResolver.ResolveContentType(fileName);
-                            result.Add(blobInfo);
-                        }
-                    }
+                    var blobInfos = await UploadFilesFormFileCollection(folderUrl, files);
+                    result.AddRange(blobInfos);
+                }
+                else if(!Request.Form.Files.IsNullOrEmpty())
+                {
+                    var blobInfos = await UploadFilesFormFileCollection(folderUrl, Request.Form.Files);
+                    result.AddRange(blobInfos);
                 }
             }
             catch (HttpRequestException ex)
@@ -185,6 +162,49 @@ namespace VirtoCommerce.AssetsModule.Web.Controllers
             }
 
             return Ok(result.ToArray());
+        }
+
+        private async Task<List<BlobInfo>> UploadFilesFormFileCollection(string folderUrl, IFormFileCollection files)
+        {
+            var result = new List<BlobInfo>();
+
+            foreach (var file in files)
+            {
+                var targetFilePath = UrlHelpers.Combine(folderUrl ?? "", Uri.EscapeDataString(file.FileName));
+                var rawTargetFilePath = UrlHelpers.Combine(folderUrl ?? "", file.FileName);
+                await using (var targetStream = await _blobProvider.OpenWriteAsync(targetFilePath))
+                {
+                    await file.CopyToAsync(targetStream);
+                }
+
+                var blobInfo = AbstractTypeFactory<BlobInfo>.TryCreateInstance();
+                blobInfo.Name = file.FileName;
+                blobInfo.RelativeUrl = targetFilePath;
+                blobInfo.Url = _urlResolver.GetAbsoluteUrl(rawTargetFilePath);
+                blobInfo.ContentType = MimeTypeResolver.ResolveContentType(file.FileName);
+
+                result.Add(blobInfo);
+            }
+
+            return result;
+        }
+
+        private async Task<BlobInfo> UploadFileFromUrl(string folderUrl, string url, string name)
+        {
+            var fileName = name ?? HttpUtility.UrlDecode(Path.GetFileName(url));
+            var fileUrl = UrlHelpers.Combine(folderUrl ?? "", Uri.EscapeDataString(fileName));
+            var client = _httpClientFactory.CreateClient();
+
+            await using var remoteStream = await client.GetStreamAsync(url);
+            await using var blobStream = await _blobProvider.OpenWriteAsync(fileUrl);
+            await remoteStream.CopyToAsync(blobStream);
+
+            var blobInfo = AbstractTypeFactory<BlobInfo>.TryCreateInstance();
+            blobInfo.Name = fileName;
+            blobInfo.RelativeUrl = fileUrl;
+            blobInfo.Url = _urlResolver.GetAbsoluteUrl(fileUrl);
+
+            return blobInfo;
         }
 
         /// <summary>

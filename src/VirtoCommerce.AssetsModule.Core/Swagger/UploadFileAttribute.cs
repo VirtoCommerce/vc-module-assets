@@ -5,6 +5,7 @@ namespace VirtoCommerce.AssetsModule.Core.Swagger
     /// <summary> 
     /// Use this attribute for controllers methods to allow file upload via Swagger 
     /// </summary>
+    [Obsolete("Use either IFormFile or IFormFileCollection", DiagnosticId = "VC0012", UrlFormat = "https://docs.virtocommerce.org/products/products-virto3-versions")]
     [AttributeUsage(AttributeTargets.Method)]
     public sealed class UploadFileAttribute : Attribute
     {
