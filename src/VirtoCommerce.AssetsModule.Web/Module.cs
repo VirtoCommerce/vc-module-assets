@@ -9,7 +9,6 @@ using VirtoCommerce.AssetsModule.Data.PostgreSql;
 using VirtoCommerce.AssetsModule.Data.Repositories;
 using VirtoCommerce.AssetsModule.Data.Services;
 using VirtoCommerce.AssetsModule.Data.SqlServer;
-using VirtoCommerce.AssetsModule.Web.Swagger;
 using VirtoCommerce.Platform.Core.Modularity;
 using VirtoCommerce.Platform.Data.Extensions;
 
@@ -22,11 +21,6 @@ namespace VirtoCommerce.AssetsModule.Web
 
         public void Initialize(IServiceCollection serviceCollection)
         {
-            serviceCollection.AddSwaggerGen(c =>
-            {
-                c.OperationFilter<FileUploadOperationFilter>();
-            });
-
             serviceCollection.AddDbContext<AssetsDbContext>((provider, options) =>
             {
                 var databaseProvider = Configuration.GetValue("DatabaseProvider", "SqlServer");
