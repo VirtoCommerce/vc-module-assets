@@ -10,7 +10,7 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="All" />
-    <PackageReference Include="VirtoCommerce.Platform.Data.MySql" Version="3.917.0" />
+    <PackageReference Include="VirtoCommerce.Platform.Data.MySql" Version="3.918.0-alpha.13171-vcst-4353" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\VirtoCommerce.AssetsModule.Data\VirtoCommerce.AssetsModule.Data.csproj" />
