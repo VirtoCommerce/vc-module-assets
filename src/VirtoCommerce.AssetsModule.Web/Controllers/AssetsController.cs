@@ -117,7 +117,6 @@ namespace VirtoCommerce.AssetsModule.Web.Controllers
         /// <returns></returns>
         [HttpPost]
         [Route("")]
-        [Consumes("multipart/form-data")]
         [DisableFormValueModelBinding]
         [DisableRequestSizeLimit]
         [UploadFile(AllowMultiple = false, Description = "Upload file to local disk storage in uploads folder", Required = false)]
