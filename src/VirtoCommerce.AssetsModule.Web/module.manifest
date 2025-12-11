@@ -3,7 +3,7 @@
   <id>VirtoCommerce.Assets</id>
   <version>3.816.0</version>
   <version-tag />
-  <platformVersion>3.917.0</platformVersion>
+  <platformVersion>3.919.0</platformVersion>
   <dependencies />
   <title>Assets Management</title>
   <description>Common abstractions for asset search, retrieval, and manipulation, making it easy for developers to work with assets regardless of their underlying storage location.</description>

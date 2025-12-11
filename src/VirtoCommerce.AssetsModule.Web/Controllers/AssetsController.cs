@@ -13,12 +13,12 @@ using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Options;
 using Microsoft.Net.Http.Headers;
 using VirtoCommerce.AssetsModule.Core.Assets;
-using VirtoCommerce.AssetsModule.Core.Swagger;
 using VirtoCommerce.AssetsModule.Web.Helpers;
 using VirtoCommerce.AssetsModule.Web.Validators;
 using VirtoCommerce.Platform.Core;
 using VirtoCommerce.Platform.Core.Common;
 using VirtoCommerce.Platform.Core.Exceptions;
+using VirtoCommerce.Platform.Core.Swagger;
 using VirtoCommerce.Platform.Data.Helpers;
 
 using UrlHelpers = VirtoCommerce.Platform.Core.Extensions.UrlHelperExtensions;
@@ -49,13 +49,13 @@ namespace VirtoCommerce.AssetsModule.Web.Controllers
         /// <returns></returns>
         [HttpPost]
         [Route("localstorage")]
+        [Consumes("multipart/form-data")]
         [DisableFormValueModelBinding]
         [DisableRequestSizeLimit]
         [Authorize(PlatformConstants.Security.Permissions.AssetCreate)]
+        [UploadFile(AllowMultiple = false, Description = "Upload file to local disk storage in uploads folder", Required = true)]
         public async Task<ActionResult<BlobInfo[]>> UploadAssetToLocalFileSystemAsync()
         {
-            // Now supports downloading one file, find a solution for downloading multiple files
-            // https://learn.microsoft.com/en-us/aspnet/core/mvc/models/file-uploads?view=aspnetcore-8.0
             var result = new List<BlobInfo>();
 
             if (!MultipartRequestHelper.IsMultipartContentType(Request.ContentType))
@@ -96,6 +96,7 @@ namespace VirtoCommerce.AssetsModule.Web.Controllers
                     //Use only file name as Url, for further access to these files need use PlatformOptions.LocalUploadFolderPath
                     blobInfo.Url = fileName;
                     blobInfo.ContentType = MimeTypeResolver.ResolveContentType(fileName);
+                    blobInfo.Size = contentDisposition.Size ?? 0;
                     result.Add(blobInfo);
                 }
             }
@@ -107,7 +108,8 @@ namespace VirtoCommerce.AssetsModule.Web.Controllers
         /// Upload assets to the folder
         /// </summary>
         /// <remarks>
-        /// Request body can contain multiple files.
+        /// Request body contains a single file when no <paramref name="url"/> is provided.
+        /// When <paramref name="url"/> is specified, the file is streamed from the remote URL instead.
         /// </remarks>
         /// <param name="folderUrl">Parent folder url (relative or absolute).</param>
         /// <param name="url">Url for uploaded remote resource (optional)</param>
@@ -116,11 +118,11 @@ namespace VirtoCommerce.AssetsModule.Web.Controllers
         [HttpPost]
         [Route("")]
         [DisableFormValueModelBinding]
+        [DisableRequestSizeLimit]
+        [UploadFile(AllowMultiple = false, Description = "Upload file to local disk storage in uploads folder", Required = false)]
         [Authorize(PlatformConstants.Security.Permissions.AssetCreate)]
-        [UploadFile]
         public async Task<ActionResult<BlobInfo[]>> UploadAssetAsync([FromQuery] string folderUrl, [FromQuery] string url = null, [FromQuery] string name = null)
         {
-            // https://learn.microsoft.com/en-us/aspnet/core/mvc/models/file-uploads?view=aspnetcore-8.0
             if (url == null && !MultipartRequestHelper.IsMultipartContentType(Request.ContentType))
             {
                 return BadRequest($"Expected a multipart request, but got {Request.ContentType}");
@@ -170,6 +172,7 @@ namespace VirtoCommerce.AssetsModule.Web.Controllers
                             blobInfo.RelativeUrl = targetFilePath;
                             blobInfo.Url = _urlResolver.GetAbsoluteUrl(rawTargetFilePath);
                             blobInfo.ContentType = MimeTypeResolver.ResolveContentType(fileName);
+                            blobInfo.Size = contentDisposition.Size ?? 0;
                             result.Add(blobInfo);
                         }
                     }
