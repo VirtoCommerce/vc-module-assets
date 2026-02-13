@@ -4,15 +4,15 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using VirtoCommerce.AssetsModule.Core.Services;
+using VirtoCommerce.AssetsModule.Data.MySql;
+using VirtoCommerce.AssetsModule.Data.PostgreSql;
 using VirtoCommerce.AssetsModule.Data.Repositories;
 using VirtoCommerce.AssetsModule.Data.Services;
+using VirtoCommerce.AssetsModule.Data.SqlServer;
 using VirtoCommerce.Platform.Core.Modularity;
 using VirtoCommerce.Platform.Data.Extensions;
-using VirtoCommerce.Platform.Data.MySql;
 using VirtoCommerce.Platform.Data.MySql.Extensions;
-using VirtoCommerce.Platform.Data.PostgreSql;
 using VirtoCommerce.Platform.Data.PostgreSql.Extensions;
-using VirtoCommerce.Platform.Data.SqlServer;
 using VirtoCommerce.Platform.Data.SqlServer.Extensions;
 
 namespace VirtoCommerce.AssetsModule.Web
