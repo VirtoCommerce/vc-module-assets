@@ -113,7 +113,7 @@ angular.module('virtoCommerce.assetsModule')
                     var dialog = {
                         id: "confirmDeleteItem",
                         title: "platform.dialogs.folders-delete.title",
-                        message: "platform.dialogs.folders-delete.message",
+                        data: [{ key: 'platform.dialogs.folders-delete.asset', count: selection.length }],
                         callback: function (remove) {
                             if (remove) {
                                 var listEntryIds = _.pluck(selection, 'url');
@@ -123,7 +123,7 @@ angular.module('virtoCommerce.assetsModule')
                             }
                         }
                     }
-                    dialogService.showConfirmationDialog(dialog);
+                    dialogService.showDeleteConfirmationDialog(dialog);
                 });
             }
 
