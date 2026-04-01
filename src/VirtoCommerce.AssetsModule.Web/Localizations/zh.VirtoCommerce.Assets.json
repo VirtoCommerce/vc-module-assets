@@ -1,0 +1,11 @@
+{
+  "assets": {
+    "dialogs": {
+      "asset-delete": {
+        "title": "删除确认",
+        "message": "您确定要删除选定的文件夹或文件吗？",
+        "asset": "{{count}} 个资源"
+      }
+    }
+  }
+}

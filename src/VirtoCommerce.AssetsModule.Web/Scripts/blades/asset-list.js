@@ -112,8 +112,8 @@ angular.module('virtoCommerce.assetsModule')
                 bladeNavigationService.closeChildrenBlades(blade, function () {
                     var dialog = {
                         id: "confirmDeleteItem",
-                        title: "platform.dialogs.folders-delete.title",
-                        data: [{ key: 'platform.dialogs.folders-delete.asset', count: selection.length }],
+                        title: "assets.dialogs.asset-delete.title",
+                        items: [{ key: 'assets.dialogs.asset-delete.asset', count: selection.length }],
                         callback: function (remove) {
                             if (remove) {
                                 var listEntryIds = _.pluck(selection, 'url');
