@@ -1,0 +1,11 @@
+{
+  "assets": {
+    "dialogs": {
+      "asset-delete": {
+        "title": "Confirmação de exclusão",
+        "message": "Tem certeza de que deseja excluir as pastas ou arquivos selecionados?",
+        "asset": "{{count}} recurso(s)"
+      }
+    }
+  }
+}

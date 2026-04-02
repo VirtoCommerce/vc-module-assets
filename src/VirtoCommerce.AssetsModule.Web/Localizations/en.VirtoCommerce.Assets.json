@@ -1,0 +1,11 @@
+{
+  "assets": {
+    "dialogs": {
+      "asset-delete": {
+        "title": "Delete confirmation",
+        "message": "Are you sure you want to delete selected folders or files?",
+        "asset": "{{count}} asset(s)"
+      }
+    }
+  }
+}

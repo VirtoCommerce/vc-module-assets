@@ -1,0 +1,11 @@
+{
+  "assets": {
+    "dialogs": {
+      "asset-delete": {
+        "title": "Poiston vahvistus",
+        "message": "Oletko varma, että haluat poistaa valitut kansion tai tiedostot?",
+        "asset": "{{count}} resurssi(a)"
+      }
+    }
+  }
+}

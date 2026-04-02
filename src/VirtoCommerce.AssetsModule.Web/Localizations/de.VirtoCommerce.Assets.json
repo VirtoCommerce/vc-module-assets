@@ -1,0 +1,11 @@
+{
+  "assets": {
+    "dialogs": {
+      "asset-delete": {
+        "title": "Löschen bestätigen",
+        "message": "Sind Sie sicher, dass Sie die ausgewählten Ordner oder Dateien löschen möchten?",
+        "asset": "{{count}} Asset(s)"
+      }
+    }
+  }
+}
