@@ -1,0 +1,11 @@
+{
+  "assets": {
+    "dialogs": {
+      "asset-delete": {
+        "title": "Potwierdzenie usunięcia",
+        "message": "Czy na pewno chcesz usunąć wybrane foldery lub pliki?",
+        "asset": "{{count}} zasób(ów)"
+      }
+    }
+  }
+}

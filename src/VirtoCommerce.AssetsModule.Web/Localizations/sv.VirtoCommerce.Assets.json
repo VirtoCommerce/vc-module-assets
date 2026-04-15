@@ -1,0 +1,11 @@
+{
+  "assets": {
+    "dialogs": {
+      "asset-delete": {
+        "title": "Bekräfta radering",
+        "message": "Är du säker på att du vill radera valda mappar eller filer?",
+        "asset": "{{count}} resurs(er)"
+      }
+    }
+  }
+}

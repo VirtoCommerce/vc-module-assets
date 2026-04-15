@@ -1,0 +1,11 @@
+{
+  "assets": {
+    "dialogs": {
+      "asset-delete": {
+        "title": "Confirmación de eliminación",
+        "message": "¿Estás seguro de que quieres eliminar las carpetas o archivos seleccionados?",
+        "asset": "{{count}} recurso(s)"
+      }
+    }
+  }
+}
