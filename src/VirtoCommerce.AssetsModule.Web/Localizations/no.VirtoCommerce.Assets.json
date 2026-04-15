@@ -1,0 +1,11 @@
+{
+  "assets": {
+    "dialogs": {
+      "asset-delete": {
+        "title": "Bekreft sletting",
+        "message": "Er du sikker på at du vil slette valgte mapper eller filer?",
+        "asset": "{{count}} ressurs(er)"
+      }
+    }
+  }
+}
