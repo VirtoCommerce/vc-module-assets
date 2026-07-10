@@ -10,7 +10,6 @@
       <IncludeAssets>runtime; build; native; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="All" />
     <PackageReference Include="VirtoCommerce.Platform.Data.MySql" Version="3.1039.0" />
   </ItemGroup>
   <ItemGroup>
