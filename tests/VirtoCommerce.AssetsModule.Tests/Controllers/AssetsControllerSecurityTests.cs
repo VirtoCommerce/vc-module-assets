@@ -50,17 +50,10 @@ namespace VirtoCommerce.AssetsModule.Tests.Controllers
             // The path the traversal name would resolve to, one level above the upload folder.
             var escapedPath = Path.GetFullPath(Path.Combine(_uploadFolder, fileName));
 
-            // Act - a hardened endpoint rejects the name with a PlatformException.
-            try
-            {
-                await controller.UploadAssetToLocalFileSystemAsync();
-            }
-            catch (PlatformException)
-            {
-                // expected once the fix is in place
-            }
+            // Act & Assert - a hardened endpoint rejects the name with a PlatformException...
+            await Assert.ThrowsAsync<PlatformException>(() => controller.UploadAssetToLocalFileSystemAsync());
 
-            // Assert - the security invariant: nothing was written outside the upload folder.
+            // ...and nothing was written outside the upload folder.
             Assert.False(File.Exists(escapedPath), $"Arbitrary file write outside upload folder: {escapedPath}");
         }
 
@@ -72,17 +65,9 @@ namespace VirtoCommerce.AssetsModule.Tests.Controllers
             const string boundary = "----vcst6016boundary";
             var controller = BuildController($"multipart/form-data; boundary={boundary}", BuildMultipartBody(boundary, absoluteTarget, "poc-content"));
 
-            // Act
-            try
-            {
-                await controller.UploadAssetToLocalFileSystemAsync();
-            }
-            catch (PlatformException)
-            {
-                // expected once the fix is in place
-            }
+            // Act & Assert - rejected with a PlatformException, and no file written to the absolute path.
+            await Assert.ThrowsAsync<PlatformException>(() => controller.UploadAssetToLocalFileSystemAsync());
 
-            // Assert
             Assert.False(File.Exists(absoluteTarget), $"Arbitrary file write to absolute path: {absoluteTarget}");
         }
 
