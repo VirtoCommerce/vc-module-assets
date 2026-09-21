@@ -79,7 +79,7 @@ namespace VirtoCommerce.AssetsModule.Web.Controllers
                 if (hasContentDispositionHeader && MultipartRequestHelper.HasFileContentDisposition(contentDisposition))
                 {
                     var fileName = contentDisposition.FileName.Value;
-                    var targetFilePath = Path.Combine(uploadPath, fileName);
+                    var targetFilePath = GetSafeUploadFilePath(uploadPath, fileName);
 
                     if (!Directory.Exists(uploadPath))
                     {
@@ -102,6 +102,38 @@ namespace VirtoCommerce.AssetsModule.Web.Controllers
             }
 
             return Ok(result.ToArray());
+        }
+
+        /// <summary>
+        /// Resolves the target path for an uploaded file within the upload folder and rejects any
+        /// attempt to escape it. Blocks both rooted file names (Path.Combine discards the folder when
+        /// the second argument is rooted) and "../"-based traversal.
+        /// </summary>
+        private static string GetSafeUploadFilePath(string uploadFolderPath, string fileName)
+        {
+            if (string.IsNullOrWhiteSpace(fileName))
+            {
+                throw new PlatformException("Invalid upload file name.");
+            }
+
+            if (Path.IsPathRooted(fileName))
+            {
+                throw new PlatformException($"Invalid upload file name '{fileName}'.");
+            }
+
+            var uploadRoot = Path.GetFullPath(uploadFolderPath);
+            var targetFilePath = Path.GetFullPath(Path.Combine(uploadRoot, fileName));
+
+            var rootWithSeparator = uploadRoot.EndsWith(Path.DirectorySeparatorChar)
+                ? uploadRoot
+                : uploadRoot + Path.DirectorySeparatorChar;
+
+            if (!targetFilePath.StartsWith(rootWithSeparator, StringComparison.Ordinal))
+            {
+                throw new PlatformException($"Invalid upload file name '{fileName}'.");
+            }
+
+            return targetFilePath;
         }
 
         /// <summary>
