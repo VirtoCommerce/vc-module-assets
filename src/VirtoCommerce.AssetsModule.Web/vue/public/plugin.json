@@ -1,0 +1,18 @@
+{
+  // Assets admin UI for the Admin Shell host (Module Federation remote)
+  "remote": { "name": "assets_admin", "exposed": "./Module" },
+  "contributions": {
+    "menu": [
+      {
+        "id": "assets",
+        "sectionId": "catalog",
+        "title": "Assets",
+        "icon": "lucide-image",
+        "route": "/assets",
+        "permission": "platform:asset:access",
+        "priority": 50,
+        "replaces": "legacy.assets"
+      }
+    ]
+  }
+}
