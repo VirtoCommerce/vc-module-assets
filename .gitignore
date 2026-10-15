@@ -331,3 +331,4 @@ ASALocalRun/
 
 dist/
 node_modules/
+src/VirtoCommerce.AssetsModule.Web/plugins/
