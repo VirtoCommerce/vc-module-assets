@@ -1,0 +1,46 @@
+{
+  "ASSETS": {
+    "MENU": { "TITLE": "アセット" },
+    "PAGES": {
+      "LIST": {
+        "TITLE": "アセット",
+        "ROOT": "アセット",
+        "EMPTY": "このフォルダーは空です",
+        "COLUMNS": { "PICTURE": "画像", "NAME": "名前", "SIZE": "サイズ", "MODIFIED": "更新日時" },
+        "TOOLBAR": { "REFRESH": "更新", "NEW_FOLDER": "新しいフォルダー", "UPLOAD": "アップロード", "DELETE": "削除" }
+      },
+      "DETAILS": {
+        "TITLE": "アセット",
+        "FIELDS": { "FILE_NAME": "名前", "URL": "URL", "SIZE": "サイズ", "TYPE": "コンテンツタイプ", "MODIFIED": "更新日時" },
+        "PREVIEW": "プレビュー",
+        "TOOLBAR": { "DOWNLOAD": "ダウンロード", "COPY_LINK": "リンクをコピー", "RENAME": "名前を変更", "DELETE": "削除" }
+      },
+      "UPLOAD": {
+        "TITLE": "アセットをアップロード",
+        "SELECT_FILES": "アップロードするファイルを選択",
+        "FROM_URL": "URL からファイルを追加",
+        "URL_PLACEHOLDER": "https://example.com/image.png",
+        "ADD": "追加",
+        "PROGRESS": "アップロード中 {done} / {total}",
+        "UPLOADED": "アップロード済みのファイル",
+        "FOLDER": "アップロード先フォルダー"
+      }
+    },
+    "ACTIONS": { "OPEN": "開く", "DOWNLOAD": "ダウンロード", "COPY_LINK": "リンクをコピー", "DELETE": "削除" },
+    "PROMPT": {
+      "NEW_FOLDER": "フォルダーを作成",
+      "FOLDER_NAME": "フォルダー名",
+      "RENAME": "ファイル名を変更",
+      "FILE_NAME": "ファイル名",
+      "OK": "OK",
+      "CANCEL": "キャンセル"
+    },
+    "ALERTS": {
+      "DELETE_CONFIRMATION": "{count} 件のアセットを削除しますか？フォルダーはすべての内容とともに削除されます。この操作は元に戻せません。",
+      "OVERWRITE_CONFIRMATION": "ファイル \"{name}\" はこのフォルダーに既に存在します。上書きしますか？",
+      "LINK_COPIED": "リンクをクリップボードにコピーしました",
+      "ROOT_UPLOAD": "最初にフォルダーを開いてください。ストレージのルートにはファイルをアップロードできません。",
+      "RENAME_EXISTS": "\"{name}\" という名前のファイルはこのフォルダーに既に存在します。"
+    }
+  }
+}

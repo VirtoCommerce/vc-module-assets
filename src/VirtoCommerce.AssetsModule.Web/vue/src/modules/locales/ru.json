@@ -1,0 +1,46 @@
+{
+  "ASSETS": {
+    "MENU": { "TITLE": "Ресурсы" },
+    "PAGES": {
+      "LIST": {
+        "TITLE": "Ресурсы",
+        "ROOT": "Ресурсы",
+        "EMPTY": "Эта папка пуста",
+        "COLUMNS": { "PICTURE": "Изображение", "NAME": "Имя", "SIZE": "Размер", "MODIFIED": "Изменено" },
+        "TOOLBAR": { "REFRESH": "Обновить", "NEW_FOLDER": "Новая папка", "UPLOAD": "Загрузить", "DELETE": "Удалить" }
+      },
+      "DETAILS": {
+        "TITLE": "Ресурс",
+        "FIELDS": { "FILE_NAME": "Имя", "URL": "URL", "SIZE": "Размер", "TYPE": "Тип содержимого", "MODIFIED": "Изменено" },
+        "PREVIEW": "Предпросмотр",
+        "TOOLBAR": { "DOWNLOAD": "Скачать", "COPY_LINK": "Копировать ссылку", "RENAME": "Переименовать", "DELETE": "Удалить" }
+      },
+      "UPLOAD": {
+        "TITLE": "Загрузка ресурсов",
+        "SELECT_FILES": "Выберите файлы для загрузки",
+        "FROM_URL": "Добавить файл по URL",
+        "URL_PLACEHOLDER": "https://example.com/image.png",
+        "ADD": "Добавить",
+        "PROGRESS": "Загрузка {done} из {total}",
+        "UPLOADED": "Загруженные файлы",
+        "FOLDER": "Целевая папка"
+      }
+    },
+    "ACTIONS": { "OPEN": "Открыть", "DOWNLOAD": "Скачать", "COPY_LINK": "Копировать ссылку", "DELETE": "Удалить" },
+    "PROMPT": {
+      "NEW_FOLDER": "Создать папку",
+      "FOLDER_NAME": "Имя папки",
+      "RENAME": "Переименовать файл",
+      "FILE_NAME": "Имя файла",
+      "OK": "ОК",
+      "CANCEL": "Отмена"
+    },
+    "ALERTS": {
+      "DELETE_CONFIRMATION": "Удалить ресурсы ({count})? Папки удаляются вместе со всем содержимым. Это действие нельзя отменить.",
+      "OVERWRITE_CONFIRMATION": "Файл \"{name}\" уже существует в этой папке. Перезаписать его?",
+      "LINK_COPIED": "Ссылка скопирована в буфер обмена",
+      "ROOT_UPLOAD": "Сначала откройте папку: файлы нельзя загрузить в корень хранилища.",
+      "RENAME_EXISTS": "Файл с именем \"{name}\" уже существует в этой папке."
+    }
+  }
+}

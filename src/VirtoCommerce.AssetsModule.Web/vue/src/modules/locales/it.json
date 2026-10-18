@@ -1,0 +1,46 @@
+{
+  "ASSETS": {
+    "MENU": { "TITLE": "Risorse" },
+    "PAGES": {
+      "LIST": {
+        "TITLE": "Risorse",
+        "ROOT": "Risorse",
+        "EMPTY": "Questa cartella è vuota",
+        "COLUMNS": { "PICTURE": "Immagine", "NAME": "Nome", "SIZE": "Dimensione", "MODIFIED": "Modificato" },
+        "TOOLBAR": { "REFRESH": "Aggiorna", "NEW_FOLDER": "Nuova cartella", "UPLOAD": "Carica", "DELETE": "Elimina" }
+      },
+      "DETAILS": {
+        "TITLE": "Risorsa",
+        "FIELDS": { "FILE_NAME": "Nome", "URL": "URL", "SIZE": "Dimensione", "TYPE": "Tipo di contenuto", "MODIFIED": "Modificato" },
+        "PREVIEW": "Anteprima",
+        "TOOLBAR": { "DOWNLOAD": "Scarica", "COPY_LINK": "Copia link", "RENAME": "Rinomina", "DELETE": "Elimina" }
+      },
+      "UPLOAD": {
+        "TITLE": "Carica risorse",
+        "SELECT_FILES": "Selezionare i file da caricare",
+        "FROM_URL": "Aggiungi un file da URL",
+        "URL_PLACEHOLDER": "https://example.com/image.png",
+        "ADD": "Aggiungi",
+        "PROGRESS": "Caricamento di {done} su {total}",
+        "UPLOADED": "File caricati",
+        "FOLDER": "Cartella di destinazione"
+      }
+    },
+    "ACTIONS": { "OPEN": "Apri", "DOWNLOAD": "Scarica", "COPY_LINK": "Copia link", "DELETE": "Elimina" },
+    "PROMPT": {
+      "NEW_FOLDER": "Crea cartella",
+      "FOLDER_NAME": "Nome cartella",
+      "RENAME": "Rinomina file",
+      "FILE_NAME": "Nome file",
+      "OK": "OK",
+      "CANCEL": "Annulla"
+    },
+    "ALERTS": {
+      "DELETE_CONFIRMATION": "Eliminare {count} risorsa/e? Le cartelle vengono eliminate con tutto il loro contenuto. L'operazione non può essere annullata.",
+      "OVERWRITE_CONFIRMATION": "Il file \"{name}\" esiste già in questa cartella. Sovrascriverlo?",
+      "LINK_COPIED": "Link copiato negli appunti",
+      "ROOT_UPLOAD": "Aprire prima una cartella: non è possibile caricare file nella radice dell'archivio.",
+      "RENAME_EXISTS": "Esiste già un file denominato \"{name}\" in questa cartella."
+    }
+  }
+}
