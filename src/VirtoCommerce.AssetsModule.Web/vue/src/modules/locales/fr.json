@@ -1,0 +1,46 @@
+{
+  "ASSETS": {
+    "MENU": { "TITLE": "Ressources" },
+    "PAGES": {
+      "LIST": {
+        "TITLE": "Ressources",
+        "ROOT": "Ressources",
+        "EMPTY": "Ce dossier est vide",
+        "COLUMNS": { "PICTURE": "Image", "NAME": "Nom", "SIZE": "Taille", "MODIFIED": "Modifié" },
+        "TOOLBAR": { "REFRESH": "Actualiser", "NEW_FOLDER": "Nouveau dossier", "UPLOAD": "Charger", "DELETE": "Supprimer" }
+      },
+      "DETAILS": {
+        "TITLE": "Ressource",
+        "FIELDS": { "FILE_NAME": "Nom", "URL": "URL", "SIZE": "Taille", "TYPE": "Type de contenu", "MODIFIED": "Modifié" },
+        "PREVIEW": "Aperçu",
+        "TOOLBAR": { "DOWNLOAD": "Télécharger", "COPY_LINK": "Copier le lien", "RENAME": "Renommer", "DELETE": "Supprimer" }
+      },
+      "UPLOAD": {
+        "TITLE": "Charger des ressources",
+        "SELECT_FILES": "Sélectionnez les fichiers à charger",
+        "FROM_URL": "Ajouter un fichier par URL",
+        "URL_PLACEHOLDER": "https://example.com/image.png",
+        "ADD": "Ajouter",
+        "PROGRESS": "Chargement de {done} sur {total}",
+        "UPLOADED": "Fichiers chargés",
+        "FOLDER": "Dossier cible"
+      }
+    },
+    "ACTIONS": { "OPEN": "Ouvrir", "DOWNLOAD": "Télécharger", "COPY_LINK": "Copier le lien", "DELETE": "Supprimer" },
+    "PROMPT": {
+      "NEW_FOLDER": "Créer un dossier",
+      "FOLDER_NAME": "Nom du dossier",
+      "RENAME": "Renommer le fichier",
+      "FILE_NAME": "Nom du fichier",
+      "OK": "OK",
+      "CANCEL": "Annuler"
+    },
+    "ALERTS": {
+      "DELETE_CONFIRMATION": "Supprimer {count} ressource(s) ? Les dossiers sont supprimés avec tout leur contenu. Cette action est irréversible.",
+      "OVERWRITE_CONFIRMATION": "Le fichier \"{name}\" existe déjà dans ce dossier. Le remplacer ?",
+      "LINK_COPIED": "Lien copié dans le presse-papiers",
+      "ROOT_UPLOAD": "Ouvrez d'abord un dossier : impossible de charger des fichiers à la racine du stockage.",
+      "RENAME_EXISTS": "Un fichier nommé \"{name}\" existe déjà dans ce dossier."
+    }
+  }
+}

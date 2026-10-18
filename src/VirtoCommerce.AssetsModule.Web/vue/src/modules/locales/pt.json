@@ -1,0 +1,46 @@
+{
+  "ASSETS": {
+    "MENU": { "TITLE": "Recursos" },
+    "PAGES": {
+      "LIST": {
+        "TITLE": "Recursos",
+        "ROOT": "Recursos",
+        "EMPTY": "Esta pasta está vazia",
+        "COLUMNS": { "PICTURE": "Imagem", "NAME": "Nome", "SIZE": "Tamanho", "MODIFIED": "Modificado" },
+        "TOOLBAR": { "REFRESH": "Atualizar", "NEW_FOLDER": "Nova pasta", "UPLOAD": "Carregar", "DELETE": "Excluir" }
+      },
+      "DETAILS": {
+        "TITLE": "Recurso",
+        "FIELDS": { "FILE_NAME": "Nome", "URL": "URL", "SIZE": "Tamanho", "TYPE": "Tipo de conteúdo", "MODIFIED": "Modificado" },
+        "PREVIEW": "Visualizar",
+        "TOOLBAR": { "DOWNLOAD": "Baixar", "COPY_LINK": "Copiar link", "RENAME": "Renomear", "DELETE": "Excluir" }
+      },
+      "UPLOAD": {
+        "TITLE": "Carregar recursos",
+        "SELECT_FILES": "Selecione os arquivos a carregar",
+        "FROM_URL": "Adicionar um arquivo por URL",
+        "URL_PLACEHOLDER": "https://example.com/image.png",
+        "ADD": "Adicionar",
+        "PROGRESS": "Carregamento: {done} de {total}",
+        "UPLOADED": "Arquivos carregados",
+        "FOLDER": "Pasta de destino"
+      }
+    },
+    "ACTIONS": { "OPEN": "Abrir", "DOWNLOAD": "Baixar", "COPY_LINK": "Copiar link", "DELETE": "Excluir" },
+    "PROMPT": {
+      "NEW_FOLDER": "Criar pasta",
+      "FOLDER_NAME": "Nome da pasta",
+      "RENAME": "Renomear arquivo",
+      "FILE_NAME": "Nome do arquivo",
+      "OK": "OK",
+      "CANCEL": "Cancelar"
+    },
+    "ALERTS": {
+      "DELETE_CONFIRMATION": "Excluir {count} recurso(s)? As pastas são excluídas com todo o seu conteúdo. Esta ação não pode ser desfeita.",
+      "OVERWRITE_CONFIRMATION": "O arquivo \"{name}\" já existe nesta pasta. Substituí-lo?",
+      "LINK_COPIED": "Link copiado para a área de transferência",
+      "ROOT_UPLOAD": "Abra primeiro uma pasta: não é possível carregar arquivos na raiz do armazenamento.",
+      "RENAME_EXISTS": "Já existe um arquivo chamado \"{name}\" nesta pasta."
+    }
+  }
+}

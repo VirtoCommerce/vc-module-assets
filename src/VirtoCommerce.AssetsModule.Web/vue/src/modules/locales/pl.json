@@ -1,0 +1,46 @@
+{
+  "ASSETS": {
+    "MENU": { "TITLE": "Zasoby" },
+    "PAGES": {
+      "LIST": {
+        "TITLE": "Zasoby",
+        "ROOT": "Zasoby",
+        "EMPTY": "Ten folder jest pusty",
+        "COLUMNS": { "PICTURE": "Obraz", "NAME": "Nazwa", "SIZE": "Rozmiar", "MODIFIED": "Zmodyfikowano" },
+        "TOOLBAR": { "REFRESH": "Odśwież", "NEW_FOLDER": "Nowy folder", "UPLOAD": "Prześlij", "DELETE": "Usuń" }
+      },
+      "DETAILS": {
+        "TITLE": "Zasób",
+        "FIELDS": { "FILE_NAME": "Nazwa", "URL": "URL", "SIZE": "Rozmiar", "TYPE": "Typ zawartości", "MODIFIED": "Zmodyfikowano" },
+        "PREVIEW": "Podgląd",
+        "TOOLBAR": { "DOWNLOAD": "Pobierz", "COPY_LINK": "Kopiuj link", "RENAME": "Zmień nazwę", "DELETE": "Usuń" }
+      },
+      "UPLOAD": {
+        "TITLE": "Prześlij zasoby",
+        "SELECT_FILES": "Wybierz pliki do przesłania",
+        "FROM_URL": "Dodaj plik z adresu URL",
+        "URL_PLACEHOLDER": "https://example.com/image.png",
+        "ADD": "Dodaj",
+        "PROGRESS": "Przesyłanie {done} z {total}",
+        "UPLOADED": "Przesłane pliki",
+        "FOLDER": "Folder docelowy"
+      }
+    },
+    "ACTIONS": { "OPEN": "Otwórz", "DOWNLOAD": "Pobierz", "COPY_LINK": "Kopiuj link", "DELETE": "Usuń" },
+    "PROMPT": {
+      "NEW_FOLDER": "Utwórz folder",
+      "FOLDER_NAME": "Nazwa folderu",
+      "RENAME": "Zmień nazwę pliku",
+      "FILE_NAME": "Nazwa pliku",
+      "OK": "OK",
+      "CANCEL": "Anuluj"
+    },
+    "ALERTS": {
+      "DELETE_CONFIRMATION": "Usunąć zasoby ({count})? Foldery są usuwane wraz z całą zawartością. Tej operacji nie można cofnąć.",
+      "OVERWRITE_CONFIRMATION": "Plik \"{name}\" już istnieje w tym folderze. Zastąpić go?",
+      "LINK_COPIED": "Link skopiowano do schowka",
+      "ROOT_UPLOAD": "Najpierw otwórz folder: nie można przesyłać plików do katalogu głównego magazynu.",
+      "RENAME_EXISTS": "Plik o nazwie \"{name}\" już istnieje w tym folderze."
+    }
+  }
+}

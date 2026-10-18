@@ -1,0 +1,46 @@
+{
+  "ASSETS": {
+    "MENU": { "TITLE": "נכסים" },
+    "PAGES": {
+      "LIST": {
+        "TITLE": "נכסים",
+        "ROOT": "נכסים",
+        "EMPTY": "תיקייה זו ריקה",
+        "COLUMNS": { "PICTURE": "תמונה", "NAME": "שם", "SIZE": "גודל", "MODIFIED": "שונה" },
+        "TOOLBAR": { "REFRESH": "רענון", "NEW_FOLDER": "תיקייה חדשה", "UPLOAD": "העלאה", "DELETE": "מחיקה" }
+      },
+      "DETAILS": {
+        "TITLE": "נכס",
+        "FIELDS": { "FILE_NAME": "שם", "URL": "URL", "SIZE": "גודל", "TYPE": "סוג תוכן", "MODIFIED": "שונה" },
+        "PREVIEW": "תצוגה מקדימה",
+        "TOOLBAR": { "DOWNLOAD": "הורדה", "COPY_LINK": "העתקת קישור", "RENAME": "שינוי שם", "DELETE": "מחיקה" }
+      },
+      "UPLOAD": {
+        "TITLE": "העלאת נכסים",
+        "SELECT_FILES": "יש לבחור קבצים להעלאה",
+        "FROM_URL": "הוספת קובץ לפי URL",
+        "URL_PLACEHOLDER": "https://example.com/image.png",
+        "ADD": "הוספה",
+        "PROGRESS": "העלאה: {done} מתוך {total}",
+        "UPLOADED": "קבצים שהועלו",
+        "FOLDER": "תיקיית יעד"
+      }
+    },
+    "ACTIONS": { "OPEN": "פתיחה", "DOWNLOAD": "הורדה", "COPY_LINK": "העתקת קישור", "DELETE": "מחיקה" },
+    "PROMPT": {
+      "NEW_FOLDER": "יצירת תיקייה",
+      "FOLDER_NAME": "שם התיקייה",
+      "RENAME": "שינוי שם הקובץ",
+      "FILE_NAME": "שם הקובץ",
+      "OK": "אישור",
+      "CANCEL": "ביטול"
+    },
+    "ALERTS": {
+      "DELETE_CONFIRMATION": "מחיקת הנכסים שנבחרו ({count})? תיקיות נמחקות יחד עם כל התוכן שלהן. לא ניתן לבטל פעולה זו.",
+      "OVERWRITE_CONFIRMATION": "הקובץ \"{name}\" כבר קיים בתיקייה זו. האם להחליף אותו?",
+      "LINK_COPIED": "הקישור הועתק ללוח",
+      "ROOT_UPLOAD": "יש לפתוח תיקייה תחילה: לא ניתן להעלות קבצים לשורש האחסון.",
+      "RENAME_EXISTS": "קובץ בשם \"{name}\" כבר קיים בתיקייה זו."
+    }
+  }
+}

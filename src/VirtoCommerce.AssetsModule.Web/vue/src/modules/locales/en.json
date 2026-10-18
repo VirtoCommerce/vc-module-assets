@@ -1,0 +1,46 @@
+{
+  "ASSETS": {
+    "MENU": { "TITLE": "Assets" },
+    "PAGES": {
+      "LIST": {
+        "TITLE": "Assets",
+        "ROOT": "Assets",
+        "EMPTY": "This folder is empty",
+        "COLUMNS": { "PICTURE": "Picture", "NAME": "Name", "SIZE": "Size", "MODIFIED": "Modified" },
+        "TOOLBAR": { "REFRESH": "Refresh", "NEW_FOLDER": "New folder", "UPLOAD": "Upload", "DELETE": "Delete" }
+      },
+      "DETAILS": {
+        "TITLE": "Asset",
+        "FIELDS": { "FILE_NAME": "Name", "URL": "URL", "SIZE": "Size", "TYPE": "Content type", "MODIFIED": "Modified" },
+        "PREVIEW": "Preview",
+        "TOOLBAR": { "DOWNLOAD": "Download", "COPY_LINK": "Copy link", "RENAME": "Rename", "DELETE": "Delete" }
+      },
+      "UPLOAD": {
+        "TITLE": "Upload assets",
+        "SELECT_FILES": "Select files to upload",
+        "FROM_URL": "Add a file by URL",
+        "URL_PLACEHOLDER": "https://example.com/image.png",
+        "ADD": "Add",
+        "PROGRESS": "Uploading {done} of {total}",
+        "UPLOADED": "Uploaded files",
+        "FOLDER": "Target folder"
+      }
+    },
+    "ACTIONS": { "OPEN": "Open", "DOWNLOAD": "Download", "COPY_LINK": "Copy link", "DELETE": "Delete" },
+    "PROMPT": {
+      "NEW_FOLDER": "Create folder",
+      "FOLDER_NAME": "Folder name",
+      "RENAME": "Rename file",
+      "FILE_NAME": "File name",
+      "OK": "OK",
+      "CANCEL": "Cancel"
+    },
+    "ALERTS": {
+      "DELETE_CONFIRMATION": "Delete {count} asset(s)? Folders are deleted with all their content. This cannot be undone.",
+      "OVERWRITE_CONFIRMATION": "File \"{name}\" already exists in this folder. Overwrite it?",
+      "LINK_COPIED": "Link copied to the clipboard",
+      "ROOT_UPLOAD": "Open a folder first: files can't be uploaded to the storage root.",
+      "RENAME_EXISTS": "A file named \"{name}\" already exists in this folder."
+    }
+  }
+}

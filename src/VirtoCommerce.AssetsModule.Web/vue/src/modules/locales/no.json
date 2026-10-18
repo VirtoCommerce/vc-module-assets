@@ -1,0 +1,46 @@
+{
+  "ASSETS": {
+    "MENU": { "TITLE": "Ressurser" },
+    "PAGES": {
+      "LIST": {
+        "TITLE": "Ressurser",
+        "ROOT": "Ressurser",
+        "EMPTY": "Denne mappen er tom",
+        "COLUMNS": { "PICTURE": "Bilde", "NAME": "Navn", "SIZE": "Størrelse", "MODIFIED": "Endret" },
+        "TOOLBAR": { "REFRESH": "Oppdater", "NEW_FOLDER": "Ny mappe", "UPLOAD": "Last opp", "DELETE": "Slett" }
+      },
+      "DETAILS": {
+        "TITLE": "Ressurs",
+        "FIELDS": { "FILE_NAME": "Navn", "URL": "URL", "SIZE": "Størrelse", "TYPE": "Innholdstype", "MODIFIED": "Endret" },
+        "PREVIEW": "Forhåndsvisning",
+        "TOOLBAR": { "DOWNLOAD": "Last ned", "COPY_LINK": "Kopier lenke", "RENAME": "Gi nytt navn", "DELETE": "Slett" }
+      },
+      "UPLOAD": {
+        "TITLE": "Last opp ressurser",
+        "SELECT_FILES": "Velg filer som skal lastes opp",
+        "FROM_URL": "Legg til en fil fra URL",
+        "URL_PLACEHOLDER": "https://example.com/image.png",
+        "ADD": "Legg til",
+        "PROGRESS": "Laster opp {done} av {total}",
+        "UPLOADED": "Opplastede filer",
+        "FOLDER": "Målmappe"
+      }
+    },
+    "ACTIONS": { "OPEN": "Åpne", "DOWNLOAD": "Last ned", "COPY_LINK": "Kopier lenke", "DELETE": "Slett" },
+    "PROMPT": {
+      "NEW_FOLDER": "Opprett mappe",
+      "FOLDER_NAME": "Mappenavn",
+      "RENAME": "Gi filen nytt navn",
+      "FILE_NAME": "Filnavn",
+      "OK": "OK",
+      "CANCEL": "Avbryt"
+    },
+    "ALERTS": {
+      "DELETE_CONFIRMATION": "Slette {count} ressurs(er)? Mapper slettes med alt innhold. Dette kan ikke angres.",
+      "OVERWRITE_CONFIRMATION": "Filen \"{name}\" finnes allerede i denne mappen. Vil du overskrive den?",
+      "LINK_COPIED": "Lenken er kopiert til utklippstavlen",
+      "ROOT_UPLOAD": "Åpne en mappe først: filer kan ikke lastes opp til lagringsroten.",
+      "RENAME_EXISTS": "En fil med navnet \"{name}\" finnes allerede i denne mappen."
+    }
+  }
+}

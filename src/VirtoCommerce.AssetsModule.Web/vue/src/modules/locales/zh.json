@@ -1,0 +1,46 @@
+{
+  "ASSETS": {
+    "MENU": { "TITLE": "资源" },
+    "PAGES": {
+      "LIST": {
+        "TITLE": "资源",
+        "ROOT": "资源",
+        "EMPTY": "此文件夹为空",
+        "COLUMNS": { "PICTURE": "图片", "NAME": "名称", "SIZE": "大小", "MODIFIED": "修改时间" },
+        "TOOLBAR": { "REFRESH": "刷新", "NEW_FOLDER": "新建文件夹", "UPLOAD": "上传", "DELETE": "删除" }
+      },
+      "DETAILS": {
+        "TITLE": "资源",
+        "FIELDS": { "FILE_NAME": "名称", "URL": "URL", "SIZE": "大小", "TYPE": "内容类型", "MODIFIED": "修改时间" },
+        "PREVIEW": "预览",
+        "TOOLBAR": { "DOWNLOAD": "下载", "COPY_LINK": "复制链接", "RENAME": "重命名", "DELETE": "删除" }
+      },
+      "UPLOAD": {
+        "TITLE": "上传资源",
+        "SELECT_FILES": "选择要上传的文件",
+        "FROM_URL": "通过 URL 添加文件",
+        "URL_PLACEHOLDER": "https://example.com/image.png",
+        "ADD": "添加",
+        "PROGRESS": "正在上传 {done} / {total}",
+        "UPLOADED": "已上传的文件",
+        "FOLDER": "目标文件夹"
+      }
+    },
+    "ACTIONS": { "OPEN": "打开", "DOWNLOAD": "下载", "COPY_LINK": "复制链接", "DELETE": "删除" },
+    "PROMPT": {
+      "NEW_FOLDER": "创建文件夹",
+      "FOLDER_NAME": "文件夹名称",
+      "RENAME": "重命名文件",
+      "FILE_NAME": "文件名",
+      "OK": "确定",
+      "CANCEL": "取消"
+    },
+    "ALERTS": {
+      "DELETE_CONFIRMATION": "删除 {count} 个资源？文件夹将连同其所有内容一起删除。此操作无法撤销。",
+      "OVERWRITE_CONFIRMATION": "此文件夹中已存在文件“{name}”。是否覆盖？",
+      "LINK_COPIED": "链接已复制到剪贴板",
+      "ROOT_UPLOAD": "请先打开一个文件夹：无法将文件上传到存储根目录。",
+      "RENAME_EXISTS": "此文件夹中已存在名为“{name}”的文件。"
+    }
+  }
+}
