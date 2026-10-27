@@ -1,0 +1,17 @@
+{
+  "remote": { "name": "assets_admin", "exposed": "./Module" },
+  "contributions": {
+    "menu": [
+      {
+        "id": "assets",
+        "sectionId": "configuration",
+        "title": "Assets",
+        "icon": "lucide-image",
+        "route": "/assets",
+        "permission": "platform:asset:access",
+        "priority": 50,
+        "replaces": "legacy.assets"
+      }
+    ]
+  }
+}

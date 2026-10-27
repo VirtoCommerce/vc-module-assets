@@ -1,0 +1,46 @@
+{
+  "ASSETS": {
+    "MENU": { "TITLE": "الأصول" },
+    "PAGES": {
+      "LIST": {
+        "TITLE": "الأصول",
+        "ROOT": "الأصول",
+        "EMPTY": "هذا المجلد فارغ",
+        "COLUMNS": { "PICTURE": "الصورة", "NAME": "الاسم", "SIZE": "الحجم", "MODIFIED": "تاريخ التعديل" },
+        "TOOLBAR": { "REFRESH": "تحديث", "NEW_FOLDER": "مجلد جديد", "UPLOAD": "رفع", "DELETE": "حذف" }
+      },
+      "DETAILS": {
+        "TITLE": "الأصل",
+        "FIELDS": { "FILE_NAME": "الاسم", "URL": "URL", "SIZE": "الحجم", "TYPE": "نوع المحتوى", "MODIFIED": "تاريخ التعديل" },
+        "PREVIEW": "معاينة",
+        "TOOLBAR": { "DOWNLOAD": "تنزيل", "COPY_LINK": "نسخ الرابط", "RENAME": "إعادة تسمية", "DELETE": "حذف" }
+      },
+      "UPLOAD": {
+        "TITLE": "رفع الأصول",
+        "SELECT_FILES": "اختر الملفات المراد رفعها",
+        "FROM_URL": "إضافة ملف عبر URL",
+        "URL_PLACEHOLDER": "https://example.com/image.png",
+        "ADD": "إضافة",
+        "PROGRESS": "جارٍ الرفع: {done} من {total}",
+        "UPLOADED": "الملفات المرفوعة",
+        "FOLDER": "المجلد الهدف"
+      }
+    },
+    "ACTIONS": { "OPEN": "فتح", "DOWNLOAD": "تنزيل", "COPY_LINK": "نسخ الرابط", "DELETE": "حذف" },
+    "PROMPT": {
+      "NEW_FOLDER": "إنشاء مجلد",
+      "FOLDER_NAME": "اسم المجلد",
+      "RENAME": "إعادة تسمية الملف",
+      "FILE_NAME": "اسم الملف",
+      "OK": "موافق",
+      "CANCEL": "إلغاء"
+    },
+    "ALERTS": {
+      "DELETE_CONFIRMATION": "هل تريد حذف الأصول المحددة ({count})؟ تُحذف المجلدات مع كل محتواها. لا يمكن التراجع عن هذا الإجراء.",
+      "OVERWRITE_CONFIRMATION": "الملف «{name}» موجود بالفعل في هذا المجلد. هل تريد استبداله؟",
+      "LINK_COPIED": "تم نسخ الرابط إلى الحافظة",
+      "ROOT_UPLOAD": "افتح مجلدًا أولًا: لا يمكن رفع الملفات إلى جذر التخزين.",
+      "RENAME_EXISTS": "يوجد بالفعل ملف باسم «{name}» في هذا المجلد."
+    }
+  }
+}

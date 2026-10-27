@@ -1,0 +1,46 @@
+{
+  "ASSETS": {
+    "MENU": { "TITLE": "Recursos" },
+    "PAGES": {
+      "LIST": {
+        "TITLE": "Recursos",
+        "ROOT": "Recursos",
+        "EMPTY": "Esta carpeta está vacía",
+        "COLUMNS": { "PICTURE": "Imagen", "NAME": "Nombre", "SIZE": "Tamaño", "MODIFIED": "Modificado" },
+        "TOOLBAR": { "REFRESH": "Actualizar", "NEW_FOLDER": "Nueva carpeta", "UPLOAD": "Subir", "DELETE": "Eliminar" }
+      },
+      "DETAILS": {
+        "TITLE": "Recurso",
+        "FIELDS": { "FILE_NAME": "Nombre", "URL": "URL", "SIZE": "Tamaño", "TYPE": "Tipo de contenido", "MODIFIED": "Modificado" },
+        "PREVIEW": "Vista previa",
+        "TOOLBAR": { "DOWNLOAD": "Descargar", "COPY_LINK": "Copiar enlace", "RENAME": "Cambiar nombre", "DELETE": "Eliminar" }
+      },
+      "UPLOAD": {
+        "TITLE": "Subir recursos",
+        "SELECT_FILES": "Seleccione los archivos que desea subir",
+        "FROM_URL": "Agregar un archivo por URL",
+        "URL_PLACEHOLDER": "https://example.com/image.png",
+        "ADD": "Agregar",
+        "PROGRESS": "Subiendo {done} de {total}",
+        "UPLOADED": "Archivos subidos",
+        "FOLDER": "Carpeta de destino"
+      }
+    },
+    "ACTIONS": { "OPEN": "Abrir", "DOWNLOAD": "Descargar", "COPY_LINK": "Copiar enlace", "DELETE": "Eliminar" },
+    "PROMPT": {
+      "NEW_FOLDER": "Crear carpeta",
+      "FOLDER_NAME": "Nombre de la carpeta",
+      "RENAME": "Cambiar nombre del archivo",
+      "FILE_NAME": "Nombre del archivo",
+      "OK": "Aceptar",
+      "CANCEL": "Cancelar"
+    },
+    "ALERTS": {
+      "DELETE_CONFIRMATION": "¿Eliminar {count} recurso(s)? Las carpetas se eliminan con todo su contenido. Esta acción no se puede deshacer.",
+      "OVERWRITE_CONFIRMATION": "El archivo \"{name}\" ya existe en esta carpeta. ¿Desea sobrescribirlo?",
+      "LINK_COPIED": "Enlace copiado al portapapeles",
+      "ROOT_UPLOAD": "Abra primero una carpeta: no se pueden subir archivos a la raíz del almacenamiento.",
+      "RENAME_EXISTS": "Ya existe un archivo llamado \"{name}\" en esta carpeta."
+    }
+  }
+}

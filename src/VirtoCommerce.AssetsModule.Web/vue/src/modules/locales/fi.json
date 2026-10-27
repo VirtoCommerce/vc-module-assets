@@ -1,0 +1,46 @@
+{
+  "ASSETS": {
+    "MENU": { "TITLE": "Resurssit" },
+    "PAGES": {
+      "LIST": {
+        "TITLE": "Resurssit",
+        "ROOT": "Resurssit",
+        "EMPTY": "Tämä kansio on tyhjä",
+        "COLUMNS": { "PICTURE": "Kuva", "NAME": "Nimi", "SIZE": "Koko", "MODIFIED": "Muokattu" },
+        "TOOLBAR": { "REFRESH": "Päivitä", "NEW_FOLDER": "Uusi kansio", "UPLOAD": "Lähetä", "DELETE": "Poista" }
+      },
+      "DETAILS": {
+        "TITLE": "Resurssi",
+        "FIELDS": { "FILE_NAME": "Nimi", "URL": "URL", "SIZE": "Koko", "TYPE": "Sisältötyyppi", "MODIFIED": "Muokattu" },
+        "PREVIEW": "Esikatselu",
+        "TOOLBAR": { "DOWNLOAD": "Lataa", "COPY_LINK": "Kopioi linkki", "RENAME": "Nimeä uudelleen", "DELETE": "Poista" }
+      },
+      "UPLOAD": {
+        "TITLE": "Lähetä resursseja",
+        "SELECT_FILES": "Valitse lähetettävät tiedostot",
+        "FROM_URL": "Lisää tiedosto URL-osoitteesta",
+        "URL_PLACEHOLDER": "https://example.com/image.png",
+        "ADD": "Lisää",
+        "PROGRESS": "Lähetetään {done} / {total}",
+        "UPLOADED": "Lähetetyt tiedostot",
+        "FOLDER": "Kohdekansio"
+      }
+    },
+    "ACTIONS": { "OPEN": "Avaa", "DOWNLOAD": "Lataa", "COPY_LINK": "Kopioi linkki", "DELETE": "Poista" },
+    "PROMPT": {
+      "NEW_FOLDER": "Luo kansio",
+      "FOLDER_NAME": "Kansion nimi",
+      "RENAME": "Nimeä tiedosto uudelleen",
+      "FILE_NAME": "Tiedoston nimi",
+      "OK": "OK",
+      "CANCEL": "Peruuta"
+    },
+    "ALERTS": {
+      "DELETE_CONFIRMATION": "Poistetaanko {count} resurssi(a)? Kansiot poistetaan koko sisältöineen. Toimintoa ei voi kumota.",
+      "OVERWRITE_CONFIRMATION": "Tiedosto \"{name}\" on jo tässä kansiossa. Korvataanko se?",
+      "LINK_COPIED": "Linkki kopioitu leikepöydälle",
+      "ROOT_UPLOAD": "Avaa ensin kansio: tiedostoja ei voi lähettää tallennustilan juureen.",
+      "RENAME_EXISTS": "Tässä kansiossa on jo tiedosto nimeltä \"{name}\"."
+    }
+  }
+}
