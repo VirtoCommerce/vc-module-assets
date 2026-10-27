@@ -1,0 +1,46 @@
+{
+  "ASSETS": {
+    "MENU": { "TITLE": "Assets" },
+    "PAGES": {
+      "LIST": {
+        "TITLE": "Assets",
+        "ROOT": "Assets",
+        "EMPTY": "Dieser Ordner ist leer",
+        "COLUMNS": { "PICTURE": "Bild", "NAME": "Name", "SIZE": "Größe", "MODIFIED": "Geändert" },
+        "TOOLBAR": { "REFRESH": "Aktualisieren", "NEW_FOLDER": "Neuer Ordner", "UPLOAD": "Hochladen", "DELETE": "Löschen" }
+      },
+      "DETAILS": {
+        "TITLE": "Asset",
+        "FIELDS": { "FILE_NAME": "Name", "URL": "URL", "SIZE": "Größe", "TYPE": "Inhaltstyp", "MODIFIED": "Geändert" },
+        "PREVIEW": "Vorschau",
+        "TOOLBAR": { "DOWNLOAD": "Herunterladen", "COPY_LINK": "Link kopieren", "RENAME": "Umbenennen", "DELETE": "Löschen" }
+      },
+      "UPLOAD": {
+        "TITLE": "Assets hochladen",
+        "SELECT_FILES": "Dateien zum Hochladen auswählen",
+        "FROM_URL": "Datei per URL hinzufügen",
+        "URL_PLACEHOLDER": "https://example.com/image.png",
+        "ADD": "Hinzufügen",
+        "PROGRESS": "{done} von {total} wird hochgeladen",
+        "UPLOADED": "Hochgeladene Dateien",
+        "FOLDER": "Zielordner"
+      }
+    },
+    "ACTIONS": { "OPEN": "Öffnen", "DOWNLOAD": "Herunterladen", "COPY_LINK": "Link kopieren", "DELETE": "Löschen" },
+    "PROMPT": {
+      "NEW_FOLDER": "Ordner erstellen",
+      "FOLDER_NAME": "Ordnername",
+      "RENAME": "Datei umbenennen",
+      "FILE_NAME": "Dateiname",
+      "OK": "OK",
+      "CANCEL": "Abbrechen"
+    },
+    "ALERTS": {
+      "DELETE_CONFIRMATION": "{count} Asset(s) löschen? Ordner werden mit ihrem gesamten Inhalt gelöscht. Dies kann nicht rückgängig gemacht werden.",
+      "OVERWRITE_CONFIRMATION": "Die Datei \"{name}\" ist in diesem Ordner bereits vorhanden. Überschreiben?",
+      "LINK_COPIED": "Link in die Zwischenablage kopiert",
+      "ROOT_UPLOAD": "Öffnen Sie zuerst einen Ordner: Dateien können nicht in das Stammverzeichnis des Speichers hochgeladen werden.",
+      "RENAME_EXISTS": "Eine Datei mit dem Namen \"{name}\" ist in diesem Ordner bereits vorhanden."
+    }
+  }
+}

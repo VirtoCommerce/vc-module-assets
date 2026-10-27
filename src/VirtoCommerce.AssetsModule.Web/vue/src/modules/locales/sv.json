@@ -1,0 +1,46 @@
+{
+  "ASSETS": {
+    "MENU": { "TITLE": "Resurser" },
+    "PAGES": {
+      "LIST": {
+        "TITLE": "Resurser",
+        "ROOT": "Resurser",
+        "EMPTY": "Den här mappen är tom",
+        "COLUMNS": { "PICTURE": "Bild", "NAME": "Namn", "SIZE": "Storlek", "MODIFIED": "Ändrad" },
+        "TOOLBAR": { "REFRESH": "Uppdatera", "NEW_FOLDER": "Ny mapp", "UPLOAD": "Ladda upp", "DELETE": "Radera" }
+      },
+      "DETAILS": {
+        "TITLE": "Resurs",
+        "FIELDS": { "FILE_NAME": "Namn", "URL": "URL", "SIZE": "Storlek", "TYPE": "Innehållstyp", "MODIFIED": "Ändrad" },
+        "PREVIEW": "Förhandsgranskning",
+        "TOOLBAR": { "DOWNLOAD": "Ladda ner", "COPY_LINK": "Kopiera länk", "RENAME": "Byt namn", "DELETE": "Radera" }
+      },
+      "UPLOAD": {
+        "TITLE": "Ladda upp resurser",
+        "SELECT_FILES": "Välj filer att ladda upp",
+        "FROM_URL": "Lägg till en fil från URL",
+        "URL_PLACEHOLDER": "https://example.com/image.png",
+        "ADD": "Lägg till",
+        "PROGRESS": "Laddar upp {done} av {total}",
+        "UPLOADED": "Uppladdade filer",
+        "FOLDER": "Målmapp"
+      }
+    },
+    "ACTIONS": { "OPEN": "Öppna", "DOWNLOAD": "Ladda ner", "COPY_LINK": "Kopiera länk", "DELETE": "Radera" },
+    "PROMPT": {
+      "NEW_FOLDER": "Skapa mapp",
+      "FOLDER_NAME": "Mappnamn",
+      "RENAME": "Byt namn på fil",
+      "FILE_NAME": "Filnamn",
+      "OK": "OK",
+      "CANCEL": "Avbryt"
+    },
+    "ALERTS": {
+      "DELETE_CONFIRMATION": "Radera {count} resurs(er)? Mappar raderas med allt innehåll. Det går inte att ångra.",
+      "OVERWRITE_CONFIRMATION": "Filen \"{name}\" finns redan i den här mappen. Vill du skriva över den?",
+      "LINK_COPIED": "Länken har kopierats till urklipp",
+      "ROOT_UPLOAD": "Öppna en mapp först: filer kan inte laddas upp till lagringens rot.",
+      "RENAME_EXISTS": "Det finns redan en fil med namnet \"{name}\" i den här mappen."
+    }
+  }
+}
